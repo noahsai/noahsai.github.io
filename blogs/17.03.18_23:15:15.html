@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>deepin下chrome无法播放flash</title><link rel="stylesheet" href="../my.css"><script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><link><script src="../my.js"></script><script type="text/javascript"> window.onresize=clickheight;window.onload=clickheight;</script></head><body  ><div id="top" ><div class="logo" ><a ><img src="../img/1z.png"></a></div><div class="weather" ><iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&color=%23&icon=3&num=5"></iframe></div><ul class="menu" ><li class="item" ><a href="../index.html">首页</a></li><li class="item_current" ><a href="../blogs.html">日志</a></li><li class="item" ><a href="../works.html">作品</a></li><li class="item" ><a href="../helpme.html">求助</a></li><li class="item" ><a href="../about.html">关于</a></li></ul></div><div id="main"><table cellspacing=20px><tr ><td valign=top id="blog_show" class="blogshow"><div class = "showdiv"><div class = "blogtitle"><p class="title_text">deepin下chrome无法播放flash</p><span class='writen_time'>17.03.19_11:42:23</span></div><div class = "blog_text"><p>
+	系统升级或者chrome升级后，出现flash无法播放的问题
+</p>
+<p>
+	提示“重启以启动flash”之类的
+</p>
+<p>
+	商店里显示chrome 的flash插件已经安装，但是就是无法播放，这是需要重装一下flash插件
+</p>
+<p>
+	<p>
+		为确保完全重装
+	</p>
+	<p>
+		先删除原本的插件文件
+	</p>
+	<p>
+		<span style="background-color:#CCCCCC;"><em>rm &nbsp;-rf &nbsp;~</em></span><span style="background-color:#CCCCCC;"><em>/.config/google-chrome/PepperFlash&nbsp;</em></span>
+	</p>
+再重装
+</p>
+<p>
+	<span style="background-color:#CCCCCC;"><em>sudo apt-get &nbsp;purge libflashplugin-pepper &nbsp;</em></span>
+</p>
+<p>
+	<span style="background-color:#CCCCCC;"><em>sudo apt-get install&nbsp;<em>&nbsp;libflashplugin-pepper &nbsp;</em></em></span>
+</p>
+<p>
+	重启chrome看看。
+</p>
+<p>
+	没问题的再重启电脑看看能否一直生效。
+</p>
+<p>
+	<br />
+</p></div><div class="prenextblog"><span class="pages"><a  class="changepage" onclick="preblog('blogs')">上一篇</a>&nbsp&nbsp&nbsp&nbsp<a  class="changepage" onclick="nextblog('blogs')">下一篇</a><span></div></div></td></tr></table></div><div id="bottom"><p>Thanks to github</p></div></body></html>

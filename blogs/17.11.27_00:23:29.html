@@ -1,0 +1,270 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>记——第一次上手UEFI电脑，将mbr硬盘的Windows7和Linux转为gpt+uefi启动</title><link rel="stylesheet" href="../my.css"><script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><link><script src="../my.js"></script><script type="text/javascript"> window.onresize=clickheight;window.onload=clickheight;</script></head><body  ><div id="top" ><div class="logo" ><a ><img src="../img/1z.png"></a></div><div class="weather" ><iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&color=%23&icon=3&num=5"></iframe></div><ul class="menu" ><li class="item" ><a href="../index.html">首页</a></li><li class="item_current" ><a href="../blogs.html">日志</a></li><li class="item" ><a href="../works.html">作品</a></li><li class="item" ><a href="../helpme.html">求助</a></li><li class="item" ><a href="../about.html">关于</a></li></ul></div><div id="main"><table cellspacing=20px><tr ><td valign=top id="blog_show" class="blogshow"><div class = "showdiv"><div class = "blogtitle"><p class="title_text">记——第一次上手UEFI电脑，将mbr硬盘的Windows7和Linux转为gpt+uefi启动</p><span class='writen_time'>17.11.27_00:30:40</span></div><div class = "blog_text"><p>
+	这是篇日记，前面有大量的个人情绪，要看方法的请直接看后面。
+</p>
+<p>
+	--------------------------------------------------------------------------------------------
+</p>
+<p>
+	我终于上手新电脑了<img src="../editor/Simple%20Examples_files/plugins/emoticons/images/5.gif" border="0" alt="" />虽然还是用别人的旧电脑<img src="../editor/Simple%20Examples_files/plugins/emoticons/images/5.gif" border="0" alt="" />但是总算能够用上近代一点的硬件了，可以抛弃8,9年前的g450了，回顾一下自己的电脑史，感觉真tm艰险<img src="../editor/Simple%20Examples_files/plugins/emoticons/images/5.gif" border="0" alt="" />唯一一台自己的新电脑用了两年就挂了，之后只能不断用旧电脑，还喜欢上捡垃圾<img src="../editor/Simple%20Examples_files/plugins/emoticons/images/5.gif" border="0" alt="" />凄凉。
+</p>
+<p>
+	这次别人退落来的电脑还真是有点不足，一个硬盘位(大事)，没vga(小事)，amd显卡(中事)，i5低压(小事)，重(小事)；<span style="line-height:1.5;">当然也有好的方面，例如蓝牙，8+4内存。</span> 
+</p>
+<p>
+	但是一个硬盘位就导致我今天的要做的事了。
+</p>
+<p>
+	现在固态贵过黄金，买个小的不够用，买个大的没这个资本，迫不得已只能继续用旧机的硬盘，旧的硬盘里面原本就有已经安装好的Windows和Linux，只不过是mbr硬盘下安装。现在都用上uefi的电脑了，还用mbr就始终有点不甘心，况且开机grub2进Windows时会花屏的，所以就下定决心搞他一波转uefi启动。
+</p>
+<p>
+	---------------------------------------------------------------
+</p>
+<p>
+	先是备份好Linux的重要资料，毕竟没有独立home。
+</p>
+<p>
+	再百度好Windows7转uefi的方法，很多都是教你如何使用uefi模式安装win7，只有几篇是现成mbr的win7转uefi的，不过方法够用了。先搞定Win7。
+</p>
+<p>
+	<span style="color:#337FE5;">------------------------------【Win7】-----------------------------</span> 
+</p>
+<p>
+	<span style="color:#337FE5;">Windows的转换不难，安装教程来基本没事。</span> 
+</p>
+<p>
+	<span style="color:#337FE5;">1。做一个先进点的U盘pe，win8以上的，支持uefi启动的。</span> 
+</p>
+<p>
+	<span style="color:#337FE5;">2。进去用DG将现在的mbr硬盘转换为gpt硬盘。</span> 
+</p>
+<p>
+	<span style="color:#337FE5;">【此处注意一下，Linux的分区是不是被添加上盘符了，是的话删除掉盘符，也可修复Win7后在Win7下删除。不急。】</span> 
+</p>
+<p>
+	<span style="color:#337FE5;">3。继续用DG分一个ESP格式的分区出来，尽量几百m以上吧，反正我直接给了1G。</span> 
+</p>
+<p>
+	<span style="color:#337FE5;">4。给格式化好的ESP分区一个盘符。</span><span style="line-height:1.5;color:#337FE5;">然后关闭DG，</span> 
+</p>
+<p>
+	<span style="color:#337FE5;">5。看看“计算机”里面有没有ESP分区，并且能够显示大小，能够打开的。</span> 
+</p>
+<p>
+	<span style="color:#337FE5;">如果ESP分区不能显示大小，不能打开，可以重启PE看看，还不行就按照步骤4搞几次。反正确定ESP分区能用才行。</span> 
+</p>
+<p>
+	<span style="color:#337FE5;">5。使用PE的uefi启动修复工具，按提示输入系统所在分区，输入ESP分区盘符（要确认好）</span> 
+</p>
+<p>
+	<span style="color:#337FE5;">6。关机/重启 ，拔掉u盘，进BIOS看看有没有Windows的启动项，我的提示不支持安全模式，所以我是关闭安全模式了。</span> 
+</p>
+<p>
+	<span style="color:#337FE5;">7。开机如果能进Win7就ok了，如果不行就重复上面的步骤吧。</span> 
+</p>
+<p>
+	<span style="color:#337FE5;">８．开机后应该会提示不是正版之类的，自行想办法吧。我使用一个OEM的工具搞定的。</span> 
+</p>
+<p>
+	-----------------------------------------------------------------------
+</p>
+<p>
+	搞定Windows之后就到Linux了，我百度了一圈，发现这方面的资料很少，所以换了个思维，百度grub2的uefi修复。百度到两三篇有用的文章用于实践。
+</p>
+<p>
+	Linux的修复无非就是重装一个uefi模式的grub2。
+</p>
+<p>
+	主要参考了以下文章：
+</p>
+<p>
+	http://tieba.baidu.com/p/4055631072
+</p>
+<p>
+	http://cnzhx.net/blog/restore-grub2-boot-menu-with-uefi/
+</p>
+<p>
+	还有一些现在找不到，当时用手机百度的，再次还得感谢各位的贡献，谢谢。
+</p>
+<p>
+	最后我基本是按照第二篇的步骤修复了，多篇文章综合起来是为了确定这是个通用的方法。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<span style="line-height:1.5;">我这硬盘里的Linux是deepin，垃圾东西，要不是想搞一下mbr的Linux转efi，就™直接装过一个Linux。</span> 
+</p>
+<p>
+	我找来一个U盘Linux——slax，之前装来玩的，现在刚好派上用场。
+</p>
+<p>
+	开始按照各篇文章的方法都无功而返，后来发觉文章里的grub和我的grub有点不同，后来我推测文章中的都是修复原本是uefi的Linux，而我这个是mbr的Linux，
+</p>
+<p>
+	所以系统里的grub并没有uefi相关的东西，所以每到install时都会出现错误。
+</p>
+<p>
+	由于slax是一个很精简的系统。里面的grub也没什么东西，后来我就回到Windows，用虚拟机加载物理硬盘，引导manjaro的iso进入live环境
+</p>
+<p>
+	将里面的grub整个复制到了/lib 和/usr/lib/里面，deepin里的/lib 里原本没有grub的，但我看到之前错误提示好像有这个路径的grub，所以就复制一份到这里了，以防万一。
+</p>
+<p>
+	万事具备了，原本打算直接在虚拟机里修复的，但是貌似硬盘有问题，用一阵就会自动冻结了。所以还是返回slax修复。
+</p>
+<p>
+	<span style="color:#009900;">-----------------------------【Linux</span><span style="line-height:1.5;color:#009900;">】---------------------------------</span><span style="color:#009900;"></span> 
+</p>
+<p>
+	<span style="color:#009900;">用的是第二篇文章的方法，挂载时小有不同，根据不同的live，自行判断使用命令是否需要加sudo，我的slax是root登录的，所以不用。</span> 
+</p>
+<p>
+	<span style="color:#009900;">1.首先确认你的系统组成，有没有独立/home ，/boot之类的，有的话到时全都要挂载到相应位置。</span>
+</p>
+<p>
+	<span style="color:#009900;">2.由于我之前的是mbr系统，所以/boot里并没有efi这个文件夹，所以我先在文件管理器里创建了一个，然后再在文管里卸载这个分区。</span>
+</p>
+<p>
+	<span style="color:#009900;">3.先看看以前的系统在哪个/哪些分区，esp又是哪个分区</span><span style="color:#009900;">，</span> 
+</p>
+<p>
+	<span style="color:#009900;">fdisk -l</span> 
+</p>
+<p>
+	<span style="color:#009900;">然后我知道了deepin的/在 /dev/sda5，ESP在/dev/</span><span style="color:#009900;">sda4。记好。</span> 
+</p>
+<p>
+	<span style="color:#009900;"><br />
+</span>
+</p>
+<p>
+	<span style="color:#009900;">4.<span style="color:#009900;">挂载</span> /到 现在系统的/mnt，即是挂着sda5到/mnt</span> 
+</p>
+<p>
+	<span style="color:#009900;">mount &nbsp;/dev/sda5 &nbsp;/mnt</span> 
+</p>
+<p>
+	<span style="color:#009900;"><br />
+</span>
+</p>
+<p>
+	<span style="color:#009900;">5.</span><span style="color:#009900;">挂载 ESP分区到 之前系统的/boot/efi，即是挂着/dev/sda4到/mnt/boot/efi ,记住此时/mnt 就是deepin的/</span> 
+</p>
+<p>
+	<span style="color:#009900;">mount /dev/sda4 &nbsp;/mnt/boot/efi</span>
+</p>
+<p>
+	<span style="color:#009900;"><br />
+</span>
+</p>
+<p>
+	<span style="color:#009900;">6.<span style="color:#009900;">挂载</span>其他必要文件夹,下面的--bind是两个英文的减号</span> 
+</p>
+<p>
+	<span style="color:#009900;">mount &nbsp;--bind &nbsp;/sys &nbsp;/mnt/sys</span> 
+</p>
+<p>
+	<span style="color:#009900;">mount &nbsp;--bind &nbsp;/proc &nbsp;/mnt/proc</span> 
+</p>
+<p>
+	<span> </span> 
+</p>
+<p>
+	<span style="color:#009900;">mount &nbsp;--bind &nbsp;/dev &nbsp;/mnt/dev</span> 
+</p>
+<p>
+	<span style="color:#009900;"><br />
+</span>
+</p>
+<p>
+	<span style="color:#009900;">7.然后chroot到之前系统，不懂没关系，我也不懂，反正照做</span> 
+</p>
+<p>
+	<span style="color:#009900;">chroot &nbsp;/mnt</span> 
+</p>
+<p>
+	<span style="color:#009900;">此时就进入了chroot的模式，现在终端所操作的是之前的系统，命令也是哪个系统的。</span> 
+</p>
+<p>
+	<span style="color:#009900;"><br />
+</span>
+</p>
+<p>
+	<span style="color:#009900;">8.安装grub2引导，命令用grub还是grub2完全看你那个系统用的是哪个</span> 
+</p>
+<p>
+	<span style="line-height:1.5;color:#009900;">grub</span><span style="line-height:1.5;color:#009900;">-install &nbsp;--target=x86_64-efi</span>
+</p>
+<p>
+	<span style="line-height:1.5;color:#009900;"><br />
+</span>
+</p>
+<p>
+	<span style="color:#009900;">由于我已经复制了完整的grub到deepin了，所以这次顺利安装完成</span> 
+</p>
+<p>
+	<span style="color:#009900;">按文章说的，如果是安全启动</span><span style="color:#009900;font-family:Roboto, Sans;font-size:14px;line-height:28px;background-color:#FFFFFF;"> Secure Boot，还需要下面这行指令，</span> 
+</p>
+<p>
+	<span style="color:#009900;font-family:Roboto, Sans;font-size:14px;line-height:28px;background-color:#FFFFFF;">shim-install</span> 
+</p>
+<p>
+	<span style="color:#009900;">由于我关闭了安全启动，所以我没进行这一步。</span> 
+</p>
+<p>
+	<span style="color:#009900;"><br />
+</span>
+</p>
+<p>
+	<span style="color:#009900;">9.重建grub2的菜单，下面的各个grub按你自己的实际情况来写，</span><span style="color:#009900;">，看看系统的grub</span><span style="line-height:1.5;color:#009900;">命令</span><span style="line-height:1.5;color:#009900;">带不带2的，</span><span style="line-height:1.5;color:#009900;">看看boot里的是grub还是grub2就好了</span> 
+</p>
+<p>
+	<span style="color:#009900;">grub-mkconfig -o /boot/grub2/grub.cfg</span><span style="color:#009900;"></span> 
+</p>
+<p>
+	<span style="color:#009900;"><br />
+</span>
+</p>
+<p>
+	<span style="color:#009900;">10。退出chroot，</span> 
+</p>
+<p>
+	<span style="color:#009900;">exit</span> 
+</p>
+<p>
+	<span style="color:#009900;">这就退出了</span> 
+</p>
+<p>
+	<span style="color:#009900;"><br />
+</span>
+</p>
+<p>
+	<span style="color:#009900;">11.卸载刚才挂载的分区,我的顺序和挂载相反，不知道有没有这个讲究的，这里的卸载我发现了奇怪的现象（可能是我少见多怪），有的系统umount的是挂载的设备，有的是挂载的点</span> 
+</p>
+<p>
+	<span style="color:#009900;">umount &nbsp;/sys &nbsp;（不行就 umount /mnt/sys 试试）</span> 
+</p>
+<p>
+	<span style="color:#009900;">umount &nbsp;/proc </span><span style="color:#009900;">（不行就 umount /mnt/proc 试试）</span> 
+</p>
+<p>
+	<span style="color:#009900;">umount /dev </span><span style="color:#009900;">（不行就 umount /mnt/dev 试试）</span> 
+</p>
+<p>
+	<span style="color:#009900;">umount &nbsp;/dev/sda4 </span><span style="color:#009900;">（不行就 umount /mnt/boot/efi &nbsp;试试）</span> 
+</p>
+<p>
+	<span style="color:#009900;">umount &nbsp;/dev/sda5 </span><span style="color:#009900;">（不行就 umount /mnt &nbsp;试试）</span> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<span style="color:#009900;line-height:1.5;">12.此时，按道理就应该可以了，但是事实并不行，开机uefi里没有deepin的选项，可能需要另外一篇文章说的注册efi，但是我直接在Win7用PJ版的easyuefi添加deepin的选项了。</span>
+</p>
+<p>
+	<span style="color:#009900;">13.进入Windows7 ，下载easyuefi PJ版，摸索一下使用方法，添加一个Linux的启动项，选择对应的efi文件，保存就搞定了。</span> 
+</p>
+<p>
+	<span style="color:#009900;">14，重启，找到deepin的启动项了，正常进入系统。</span> 
+</p></div><div class="prenextblog"><span class="pages"><a  class="changepage" onclick="preblog('blogs')">上一篇</a>&nbsp&nbsp&nbsp&nbsp<a  class="changepage" onclick="nextblog('blogs')">下一篇</a><span></div></div></td></tr></table></div><div id="bottom"><p>Thanks to github</p></div></body></html>

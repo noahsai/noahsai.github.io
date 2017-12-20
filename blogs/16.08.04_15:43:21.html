@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>记——被双系统平板坑进uefi深渊</title><link rel="stylesheet" href="../my.css"><script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><link><script src="../my.js"></script><script type="text/javascript"> window.onresize=clickheight;window.onload=clickheight;</script></head><body  ><div id="top" ><div class="logo" ><a ><img src="../img/1z.png"></a></div><div class="weather" ><iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&color=%23&icon=3&num=5"></iframe></div><ul class="menu" ><li class="item" ><a href="../index.html">首页</a></li><li class="item_current" ><a href="../blogs.html">日志</a></li><li class="item" ><a href="../works.html">作品</a></li><li class="item" ><a href="../helpme.html">求助</a></li><li class="item" ><a href="../about.html">关于</a></li></ul></div><div id="main"><table cellspacing=20px><tr ><td valign=top id="blog_show" class="blogshow"><div class = "showdiv"><div class = "blogtitle"><p class="title_text">记——被双系统平板坑进uefi深渊</p><span class='writen_time'>16.08.04_15:43:21</span></div><div class = "blog_text"><p>
+	我的昂达820w ch平板自从被我压爆屏幕后就返厂了几次，当然，除了第一次的wifi问题外，其他都是我自己作死造成的。
+</p>
+<p>
+	然后第二次返修时帮我刷成了双系统，回来后返现之前自行换屏时戳破的电池耗电很快，然后尝试性的返厂了，顺便叫他帮我刷会单系统。
+</p>
+<p>
+	拿回来后，电池帮我换了，嘿嘿，赚了，毕竟电池是我自己戳破的，我也做好了要付钱返修的准备了。但是系统没换，算了，用着吧。
+</p>
+<p>
+	一段时间后，终于，还是觉得x86 的安卓实在没什么意思，毕竟兼容性的问题还是存在的，虽然比以前少了很多。
+</p>
+<p>
+	还是打算刷回单windows系统～
+</p>
+<p>
+	百度里删除安卓分区然后合并分区的方法失败了，合并并没有成功，不过可以多11g的分区。
+</p>
+<p>
+	但是看到c盘只剩1g可用就强迫症发作了。
+</p>
+<p>
+	下载了原本的820w ch单系统版的出厂固件（pe+系统），按照附带教程，发现做的启动u盘竟然启动不了。。。
+</p>
+<p>
+	‘从文件启动’也不行
+</p>
+<p>
+	我擦，难道是我的u盘问题吗，换个u2的一样，难道是闪迪的问题吗。。。连这想法都出来了
+</p>
+<p>
+	后来，说用pe进行安卓也可以
+</p>
+<p>
+	然后百度了一个台电平板用的pe，发现做的u盘也启动不了。
+</p>
+<p>
+	按照百度的方法使用efi shell启动，显示32位的efi 无法在64位的shell中运行。。。。
+</p>
+<p>
+	然后有找了个支持64位的pe，这次真的能进。。。
+</p>
+<p>
+	我就用这个pe安装出厂固件里的系统.win文件。
+</p>
+<p>
+	中途出的意外就不说，关键是安装好，重启，，，启动失败。。。。
+</p>
+<p>
+	我擦，进efi shell启动也提示在64位无法运行。。。
+</p>
+<p>
+	然后又折腾了一阵，还是不行。。。。。。
+</p>
+<p>
+	这时，其实真相已经浮出水面了——帮我刷成双系统时将bios之类的东西都改了，为了支持安卓，将uefi刷成64的了（百度到的，说安卓的啥只支持64位之类的，反正这里描述不一定正确）
+</p>
+<p>
+	然而我下的固件是单系统版本时的32位的系统，就是安装好了，efi其实是启动不了的。。。。。我擦
+</p>
+<p>
+	最后，我现在要去下载双系统的出厂固件了。。。。。好坑。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	一直用着旧电脑的我终于接触了一次uefi。。。当然坑的不是uefi，而是昂达那令人无语的双系统容量分配。
+</p>
+<p>
+	------------------------------------------------------
+</p>
+<p>
+	题外话：
+</p>
+<p>
+	说实话如果win7 能驱动这些硬件我真希望用win7，win10已经不是个单纯的操作系统了。。。
+</p>
+<p>
+	再如果那个linux能很好支持这平板，我用linux都无所谓～～哈哈，不过应用还是硬伤。。。
+</p></div><div class="prenextblog"><span class="pages"><a  class="changepage" onclick="preblog('blogs')">上一篇</a>&nbsp&nbsp&nbsp&nbsp<a  class="changepage" onclick="nextblog('blogs')">下一篇</a><span></div></div></td></tr></table></div><div id="bottom"><p>Thanks to github</p></div></body></html>

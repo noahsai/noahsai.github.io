@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>1-Zone</title>
+
+<link rel="stylesheet" href="my.css" />
+<script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="my.js"></script>
+<script type="text/javascript"> 
+window.ready=loaddata("home");
+window.onresize=clickheight;
+window.onload=clickheight;
+
+</script>
+</head>
+<body >
+<div id="top" >
+
+<div class="logo" >
+ <a ><img src="img/1z.png"></a>
+
+</div>
+<div class="weather" >
+<iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&color=%23&icon=3&num=5"></iframe>
+</div>
+<ul class="menu" >
+<li class="item_current" ><a href="index.html">首页</a></li>
+<li class="item" ><a href="blogs.html">日志</a></li>
+<li class="item" ><a href="works.html">作品(si)</a></li>
+<li class="item" ><a href="helpme.html">求助</a></li>
+<li class="item" ><a href="about.html">关于</a></li>
+</ul>
+
+</div>
+
+<div id="main">
+<table cellspacing=20px>
+<tr >
+<td valign=top id="main_left" class="main_part">
+<div class="part_head">
+<p class="part_title" >最新文章</p><a class="more" href="blogs.html">更多</a>
+</div>
+<div class="list">
+<ul id=blogs_ul>
+
+</ul>
+
+</div>
+</td>
+
+<td valign=top id="main_right" class="main_part">
+
+<div class="part_head">
+<p class="part_title" >好作品(si)</p><a class="more" href="works.html">更多</a>
+</div>
+<div class="list">
+<ul id="works_ul">
+
+</ul>
+</div>
+
+</td>
+</tr>
+</table>
+
+
+
+</div>
+
+<div id="bottom">
+<p>Thanks to github</p>
+</div>
+	
+</body>
+</html>		

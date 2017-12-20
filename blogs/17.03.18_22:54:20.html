@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>deepin在登陆界面处出现死循环且无法进入tty的解决办法</title><link rel="stylesheet" href="../my.css"><script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><link><script src="../my.js"></script><script type="text/javascript"> window.onresize=clickheight;window.onload=clickheight;</script></head><body  ><div id="top" ><div class="logo" ><a ><img src="../img/1z.png"></a></div><div class="weather" ><iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&color=%23&icon=3&num=5"></iframe></div><ul class="menu" ><li class="item" ><a href="../index.html">首页</a></li><li class="item_current" ><a href="../blogs.html">日志</a></li><li class="item" ><a href="../works.html">作品</a></li><li class="item" ><a href="../helpme.html">求助</a></li><li class="item" ><a href="../about.html">关于</a></li></ul></div><div id="main"><table cellspacing=20px><tr ><td valign=top id="blog_show" class="blogshow"><div class = "showdiv"><div class = "blogtitle"><p class="title_text">deepin在登陆界面处出现死循环且无法进入tty的解决办法</p><span class='writen_time'>17.03.18_22:54:20</span></div><div class = "blog_text"><p>
+	这个问题的具体症状是本应该出现登陆界面的时候出现黑屏+光标/鼠标，
+</p>
+<p>
+	但是就是没有登陆界面，而且每一两秒就屏幕就闪一次，一直循环，tty也按不出来，一直强制跳回黑屏界面。
+</p>
+<p>
+	这种情况多数都是因为某些原因lightdm起不来，系统却一直在尝试。这里要赞一下Mint，他会在尝试几次之后帮你进入tty，十分贴心。
+</p>
+<p>
+	不明白上面在说什么的可以在deepin上卸载startdde这个依赖，然后注销就可以看到了。
+</p>
+<p>
+	<span style="line-height:1.5;">下面说一下解决办法吧。</span>
+</p>
+<p>
+	<span style="color:#E53333;">以下例子是用于解决卸载startdde后出现的问题，触类旁通，不是这个问题的自己随机应变，别照抄。</span>
+</p>
+<p>
+	<span style="line-height:1.5;">重启电脑，在高级选项里进入recovery mode</span>
+</p>
+<p>
+	<span style="line-height:1.5;">选择 root shell</span>
+</p>
+<p>
+	<span style="line-height:1.5;">然后需要讲文件系统挂载为读写状态，百度得知</span>
+</p>
+<p>
+	<span style="font-family:Consolas, 'Courier New', Courier, mono, serif;line-height:1.5;background-color:#CCCCCC;"><em>mount&nbsp;-o&nbsp;remount,rw&nbsp;/&nbsp;</em></span>
+</p>
+<p>
+	<span style="line-height:1.5;"><span>接着卸载lightdm（或者将导致问题的依赖卸载掉，例如是安装了显卡驱动才造成的，那么直接卸载显卡驱动就好了，就不用动lightdm了）</span></span>
+</p>
+<p>
+	<span style="line-height:1.5;"><span style="background-color:#CCCCCC;"><em>apt-get purge lightdm</em></span><span style="background-color:#CCCCCC;"><em>&nbsp;</em></span></span>
+</p>
+<p>
+	<span style="line-height:1.5;background-color:#FFFFFF;"><span style="background-color:#FFFFFF;">重启</span></span>
+</p>
+<p>
+	<span style="background-color:#CCCCCC;">reboot&nbsp;</span>
+</p>
+<p>
+	<span style="background-color:#FFFFFF;">重启后应该会自动进入tty模式（假如是显卡驱动造成的，上一步卸载显卡驱动后重启，应该就可以看到登陆界面了）</span>
+</p>
+<p>
+	<span style="background-color:#FFFFFF;">登陆tty后</span>
+</p>
+<p>
+	将之前卸载掉的startdde和lightdm安装回去
+</p>
+<p>
+	<span style="background-color:#CCCCCC;"><em>sudo apt-get install lightdm startdde&nbsp;</em></span>
+</p>
+<p>
+	最后重启
+</p>
+<p>
+	<span style="background-color:#CCCCCC;"><em>sudo reboot&nbsp;</em></span>
+</p>
+<p>
+	<i><br />
+</i>
+</p>
+<p>
+	<i>------------------------------------【注意】--------------------------------</i>
+</p>
+<p>
+	<i>①root &nbsp;shell里是没联网的，所以只能通过卸载解决问题。</i>
+</p>
+<p>
+	<i>②进入recovery mode里有enable network的选项的，但是我没试过，或者能启动网络功能，至于会不会自动连上网络我就不知道了，因为我除了root shell能正常使用之外，其他功能都不行～～</i>
+</p>
+<p>
+	<i><br />
+</i>
+</p>
+<p>
+	<br />
+</p></div><div class="prenextblog"><span class="pages"><a  class="changepage" onclick="preblog('blogs')">上一篇</a>&nbsp&nbsp&nbsp&nbsp<a  class="changepage" onclick="nextblog('blogs')">下一篇</a><span></div></div></td></tr></table></div><div id="bottom"><p>Thanks to github</p></div></body></html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>[转载节选]grub4dos , grub2引导deepin V15 iso文件进行硬盘安装</title><link rel="stylesheet" href="../my.css"><script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><link><script src="../my.js"></script><script type="text/javascript"> window.onresize=clickheight;window.onload=clickheight;</script></head><body  ><div id="top" ><div class="logo" ><a ><img src="../img/1z.png"></a></div><div class="weather" ><iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&color=%23&icon=3&num=5"></iframe></div><ul class="menu" ><li class="item" ><a href="../index.html">首页</a></li><li class="item_current" ><a href="../blogs.html">日志</a></li><li class="item" ><a href="../works.html">作品</a></li><li class="item" ><a href="../helpme.html">求助</a></li><li class="item" ><a href="../about.html">关于</a></li></ul></div><div id="main"><table cellspacing=20px><tr ><td valign=top id="blog_show" class="blogshow"><div class = "showdiv"><div class = "blogtitle"><p class="title_text">[转载节选]grub4dos , grub2引导deepin V15 iso文件进行硬盘安装</p><span class='writen_time'>17.03.21_21:33:39</span></div><div class = "blog_text"><p>
+	<span style="font-size:14px;font-family:SimHei;">转载节选自：</span>
+</p>
+<p>
+	<span style="font-size:14px;font-family:SimHei;">https://bbs.deepin.org/forum.php?mod=viewthread&amp;tid=33785&amp;highlight=grub4dos</span>
+</p>
+<p>
+	<span style="font-size:14px;font-family:SimHei;">https://bbs.deepin.org/forum.php?mod=viewthread&amp;tid=33602</span>
+</p>
+<p>
+	<span style="font-size:14px;font-family:SimHei;">------------------------------------------------------------------------</span>
+</p>
+<p>
+	<span style="font-size:14px;font-family:SimHei;"><span style="background-color:#99BB00;color:#FFFFFF;font-size:18px;">一、</span><span style="background-color:#99BB00;color:#FFFFFF;font-size:18px;">grub4d</span><span style="background-color:#99BB00;color:#FFFFFF;font-size:18px;">os</span><span style="background-color:#99BB00;color:#FFFFFF;"><span style="font-size:18px;background-color:#99BB00;">版（据</span><span style="font-size:18px;background-color:#99BB00;">原</span><span style="font-size:18px;background-color:#99BB00;">文</span><span style="font-size:18px;background-color:#99BB00;">所说此方法不支持UEFI）本人在XP上使用没问题&nbsp;</span></span></span>
+</p>
+<p>
+	<span style="font-size:14px;font-family:SimHei;">①在windows下/u盘下配置安装好grub4dos，</span>
+</p>
+<p>
+	<span style="font-size:14px;font-family:SimHei;">②从</span><span style="font-size:14px;font-family:SimHei;">deepin-</span><span style="color:#232A3C;font-family:SimHei;font-size:14px;line-height:21px;background-color:#FFFFFF;">xxxx</span><span style="color:#232A3C;font-family:SimHei;font-size:14px;line-height:21px;background-color:#FFFFFF;">xxxx</span><span style="font-size:14px;font-family:SimHei;">.iso里提取出vmlinuz和initrd.lz</span><span style="font-size:14px;font-family:SimHei;">，翻翻里面的文件夹就能找到了</span><span style="line-height:1.5;"></span>
+</p>
+<p style="text-align:left;">
+	<span style="line-height:1.5;"><span style="font-size:14px;font-family:SimHei;">③</span><span style="font-size:14px;font-family:SimHei;">将</span><span style="font-size:14px;font-family:SimHei;">deepin-</span><span style="color:#232A3C;font-family:微软雅黑, 'Source Han Sans';font-size:14px;line-height:21px;background-color:#FFFFFF;"><span style="font-size:14px;font-family:SimHei;">xxx</span><span style="font-size:14px;font-family:SimHei;">x</span></span><span style="color:#232A3C;font-family:SimHei;font-size:14px;line-height:21px;background-color:#FFFFFF;">xxxx</span><span><span style="font-size:14px;font-family:SimHei;">.iso和</span><span style="font-size:14px;font-family:SimHei;">vml</span><span style="font-size:14px;font-family:SimHei;">inuz</span><span style="font-size:14px;font-family:SimHei;">和</span><span style="font-size:14px;font-family:SimHei;">i</span><span style="font-size:14px;font-family:SimHei;">nitrd</span><span style="font-size:14px;font-family:SimHei;">.lz</span></span><span style="font-size:14px;font-family:SimHei;">放</span><span style="font-size:14px;"></span><span style="font-size:14px;"></span><span style="font-size:14px;font-family:SimHei;">到同一个</span><span style="font-size:14px;font-family:SimHei;">文</span><span style="font-size:14px;font-family:SimHei;">件</span><span style="font-size:14px;font-family:SimHei;">夹里，将文件夹在随便一个分区里面，别放在其他文件夹里（也就是放到分区的</span><span style="font-size:14px;font-family:SimHei;">d</span><span style="font-size:14px;font-family:SimHei;">根目录）</span></span>
+</p>
+<p style="text-align:left;">
+	<span style="line-height:1.5;"><span style="font-size:14px;font-family:SimHei;">例子里就是将这三个文件放在</span><span style="color:#232A3C;font-family:SimHei;font-size:14px;line-height:21px;background-color:#FFFFFF;">bo</span><span style="color:#232A3C;font-family:SimHei;font-size:14px;line-height:21px;background-color:#FFFFFF;">otiso文件夹里的</span></span>
+</p>
+<p>
+	<span style="line-height:1.5;"><span style="font-size:14px;font-family:SimHei;">④</span><span style="font-size:14px;font-family:SimHei;">然后写grub4dos的</span><span style="font-size:14px;font-family:SimHei;">menu.lst文件</span></span>
+</p>
+<p>
+	<span style="color:#232A3C;font-family:SimHei;font-size:14px;background-color:#FFFFFF;">menu.lst菜单写法如下：</span><br />
+<span style="color:#232A3C;font-family:微软雅黑, 'Source Han Sans';font-size:14px;background-color:#FFFFFF;"><span style="font-size:14px;font-family:SimHei;">title Install&nbsp;deepin-</span><span style="font-size:14px;font-family:SimHei;">xxxxxxxx</span><span style="font-size:14px;font-family:SimHei;">.iso</span></span><br />
+<span style="color:#232A3C;font-family:微软雅黑, 'Source Han Sans';font-size:14px;background-color:#FFFFFF;"><span style="font-size:14px;"><span style="font-size:14px;font-family:SimHei;">find --set-root </span><span style="color:#E53333;font-size:14px;font-family:SimHei;">/</span></span><span style="font-size:14px;color:#E53333;font-family:SimHei;">bo</span><span style="font-size:14px;color:#E53333;font-family:SimHei;">otiso</span><span style="font-size:14px;color:#E53333;font-family:SimHei;">/deepin-</span><span style="color:#E53333;font-family:SimHei;font-size:14px;line-height:21px;background-color:#FFFFFF;">xxxxxx</span><span style="color:#E53333;font-family:SimHei;font-size:14px;line-height:21px;background-color:#FFFFFF;">xx</span><span style="font-size:14px;color:#E53333;font-family:SimHei;">.iso</span></span><br />
+<span style="color:#232A3C;font-family:微软雅黑, 'Source Han Sans';font-size:14px;background-color:#FFFFFF;"><span style="font-size:14px;"><span style="font-size:14px;font-family:SimHei;">kernel </span><span style="color:#E53333;font-size:14px;font-family:SimHei;">/bootiso/</span></span><span style="font-size:14px;"><span style="color:#E53333;font-size:14px;font-family:SimHei;">vm</span><span style="color:#E53333;font-size:14px;font-family:SimHei;">li</span></span><span style="font-size:14px;color:#E53333;font-family:SimHei;">nuz</span><span style="font-size:14px;"><span style="font-size:14px;font-family:SimHei;"> boot=live union=ov</span><span style="font-size:14px;font-family:SimHei;">erlay username=user quiet&nbsp;&nbsp;live-config&nbsp;&nbsp;findiso</span><span style="font-size:14px;font-family:SimHei;">=</span><span style="color:#E53333;font-size:14px;font-family:SimHei;">/b</span><span style="color:#E53333;font-size:14px;font-family:SimHei;">ootiso/deepin-</span></span><span style="color:#232A3C;font-family:微软雅黑, 'Source Han Sans';font-size:14px;line-height:21px;background-color:#FFFFFF;"><span style="color:#E53333;font-size:14px;font-family:SimHei;">xxxxxx</span><span style="color:#E53333;font-size:14px;font-family:SimHei;">xx</span></span><span style="font-size:14px;"><span style="color:#E53333;font-size:14px;font-family:SimHei;">.iso</span><span style="font-size:14px;font-family:SimHei;">&nbsp;&nbsp;locales=zh_CN.UTF-8</span></span></span><br />
+<span style="color:#232A3C;font-family:微软雅黑, 'Source Han Sans';font-size:14px;background-color:#FFFFFF;"><span style="font-size:14px;"><span style="font-size:14px;font-family:SimHei;">initrd </span><span style="color:#E53333;font-size:14px;font-family:SimHei;">/bootiso</span></span><span style="font-size:14px;color:#E53333;font-family:SimHei;">/</span><span style="font-size:14px;color:#E53333;font-family:SimHei;">init</span><span style="font-size:14px;color:#E53333;font-family:SimHei;">rd</span><span style="font-size:14px;color:#E53333;font-family:SimHei;">.lz</span></span><br />
+<span style="color:#232A3C;font-family:SimHei;font-size:14px;background-color:#FFFFFF;">boot</span>
+</p>
+<p>
+	<span><span style="font-size:14px;line-height:21px;font-family:SimHei;">⑤重启后进入grub4dos引导iso，进入livecd</span></span>
+</p>
+<p>
+	<span><span style="font-size:14px;line-height:21px;font-family:SimHei;">⑥安装前卸载iso</span></span>
+</p>
+<p>
+	<span><span style="font-size:14px;line-height:21px;font-family:SimHei;"><span style="background-color:#CCCCCC;font-family:SimHei;">sudo </span><span style="background-color:#CCCCCC;font-family:SimHei;">um</span><span style="background-color:#CCCCCC;font-family:SimHei;">ount&nbsp;</span><span style="background-color:#CCCCCC;"><span style="font-family:SimHei;">-l </span><span style="font-family:SimHei;">/</span><span style="font-family:SimHei;">lib</span><span style="font-family:SimHei;">/live/mount/findiso&nbsp;</span></span></span></span>
+</p>
+<p>
+	<span><span style="font-size:14px;line-height:21px;font-family:SimHei;"><span style="background-color:#CCCCCC;"><span style="font-family:SimHei;"><span style="background-color:#FFFFFF;">⑦进行安装</span><br />
+</span></span></span></span>
+</p>
+<p>
+	<span><span style="font-size:14px;line-height:21px;font-family:SimHei;"><span style="background-color:#CCCCCC;"><span style="font-family:SimHei;"><span style="background-color:#FFFFFF;"><span style="background-color:#CCCCCC;">sudo&nbsp;</span><span style="background-color:#CCCCCC;">deepin</span><span style="background-color:#CCCCCC;">-</span><span style="background-color:#CCCCCC;">installer</span><span style="background-color:#CCCCCC;">-reborn</span><span style="background-color:#CCCCCC;">&nbsp;</span><br />
+</span></span></span></span></span>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<span style="color:#232A3C;font-family:微软雅黑, 'Source Han Sans';font-size:14px;background-color:#FFFFFF;"><span style="color:#E53333;font-family:SimHei;">注意：</span><span style="color:#E53333;font-family:SimHei;">menu里的</span><span style="color:#E53333;font-family:SimHei;">vmli</span><span style="color:#E53333;"><span style="font-family:SimHei;">n</span><span style="font-family:SimHei;">uz和</span></span><span style="color:#E53333;font-family:SimHei;">init</span><span style="color:#E53333;font-family:SimHei;">rd</span><span style="color:#E53333;font-family:SimHei;">.</span><span style="color:#E53333;font-family:SimHei;">lz要与提取出来的文件名</span><span style="color:#E53333;font-family:SimHei;">一</span><span style="color:#E53333;font-family:SimHei;">致，</span><span style="color:#E53333;font-family:SimHei;">大</span><span style="color:#E53333;font-family:SimHei;">小</span><span style="color:#E53333;font-family:SimHei;">写一致</span><span style="color:#E53333;font-family:SimHei;">。</span></span>
+</p>
+<div>
+	<br />
+</div>
+<p>
+	<br />
+</p>
+<p>
+	<span style="color:#232A3C;font-family:微软雅黑, 'Source Han Sans';font-size:14px;background-color:#FFFFFF;"><span style="color:#232A3C;font-family:微软雅黑, 'Source Han Sans';font-size:14px;line-height:21px;background-color:#FFFFFF;"><span style="font-size:14px;"><span style="color:#232A3C;font-family:微软雅黑, 'Source Han Sans';font-size:14px;line-height:21px;"><span style="color:#E53333;font-size:14px;font-family:SimHei;"></span></span></span></span></span>
+</p>
+<p>
+	<span style="font-size:14px;font-family:SimHei;"><span style="background-color:#99BB00;color:#FFFFFF;font-size:18px;">二、</span><span style="background-color:#99BB00;color:#FFFFFF;font-size:18px;">Grub2</span><span style="background-color:#99BB00;color:#FFFFFF;"><span style="font-size:18px;"><span style="background-color:#99BB00;">版</span><span style="background-color:#99BB00;">（</span><span style="background-color:#99BB00;">据</span></span><span style="font-size:18px;background-color:#99BB00;">原</span><span style="font-size:18px;background-color:#99BB00;">文</span><span style="font-size:18px;background-color:#99BB00;">所说此方法支持UEFI和BIOS/legacy）</span></span></span>
+</p>
+<p>
+	<span style="font-size:14px;font-family:SimHei;"><span style="background-color:#99BB00;color:#FFFFFF;"><span style="font-size:18px;background-color:#99BB00;"><span style="color:#000000;"><span style="background-color:#FFFFFF;color:#000000;font-size:14px;"></span></span></span></span></span>
+</p>
+<p>
+	<span style="font-size:14px;font-family:SimHei;">①在windows/linux/u盘下配置安装好grub2，我觉得Grub2普遍用于linux下，所以这个方法比较适合在既有linux系统下使用既有的grub2引导iso文件。</span>
+</p>
+<p>
+	<span style="line-height:1.5;">②从</span><span style="line-height:1.5;">deepin-</span><span style="color:#232A3C;">xxxx</span><span style="color:#232A3C;">xxxx</span><span style="line-height:1.5;">.iso里提取出vmlinuz和initrd.lz</span><span style="line-height:1.5;">，翻翻里面的文件夹就能找到了</span>
+</p>
+<p>
+	<span style="line-height:1.5;"></span>
+</p>
+<p>
+	<span style="line-height:1.5;"><span style="font-size:14px;font-family:SimHei;">③</span><span style="font-size:14px;font-family:SimHei;">将</span><span style="font-size:14px;font-family:SimHei;">deepin-</span><span style="color:#232A3C;font-family:微软雅黑, 'Source Han Sans';font-size:14px;line-height:21px;background-color:#FFFFFF;"><span style="font-family:SimHei;">xxx</span><span style="font-family:SimHei;">x</span></span><span style="color:#232A3C;font-family:SimHei;font-size:14px;line-height:21px;background-color:#FFFFFF;">xxxx</span><span style="font-size:14px;font-family:SimHei;">.iso和</span><span style="font-size:14px;font-family:SimHei;">vml</span><span style="font-size:14px;font-family:SimHei;">inuz</span><span style="font-size:14px;font-family:SimHei;">和</span><span style="font-size:14px;font-family:SimHei;">i</span><span style="font-size:14px;font-family:SimHei;">nitrd</span><span style="font-size:14px;font-family:SimHei;">.lz</span><span style="font-size:14px;font-family:SimHei;">放</span><span style="font-size:14px;"></span><span style="font-size:14px;"></span><span style="font-size:14px;font-family:SimHei;">到同一个</span><span style="font-size:14px;font-family:SimHei;">文</span><span style="font-size:14px;font-family:SimHei;">件</span><span style="font-size:14px;font-family:SimHei;">夹里，将文件夹在随便一个分区里面，别放在其他文件夹里（也就是放到分区的</span><span style="font-size:14px;font-family:SimHei;">d</span><span style="font-size:14px;font-family:SimHei;">根目录）</span></span>
+</p>
+<p>
+	<span style="line-height:1.5;"><span style="font-size:14px;font-family:SimHei;">例子里就是将这三个文件放在</span><span style="color:#232A3C;font-family:SimHei;font-size:14px;line-height:21px;background-color:#FFFFFF;">bo</span><span style="color:#232A3C;font-family:SimHei;font-size:14px;line-height:21px;background-color:#FFFFFF;">otiso文件夹里的</span></span>
+</p>
+<p>
+	<span><span style="font-size:14px;line-height:21px;">④修改grub2的配置文件，grub2的配置文件与grub和grub4dos不同，可直接修改最终cfg配置文件，也可修改用于生成cfg文件的文件，详情自行百度</span></span>
+</p>
+<p>
+	<span><span style="font-size:14px;line-height:21px;">个人认为这种临时性的操作，修改最终的cfg文件即可。</span></span>
+</p>
+<p>
+	<span style="line-height:1.5;"><span style="color:#232A3C;font-family:SimHei;font-size:14px;line-height:21px;background-color:#FFFFFF;">GRUB2菜单配置文件的写法：<br />
+if &nbsp;search --file /bootiso/deepin-xxxxxx.iso; then<br />
+menuentry "install deepin-xxxxxx.iso" {<br />
+set isofile="/bootiso/deepin-xxxxxx.iso"<br />
+search --set &nbsp;-f $isofile<br />
+loopback loop $isofile<br />
+linux (loop)/live/vmlinuz.efi &nbsp;boot=live union=overlay username=user quiet &nbsp;live-config noprompt noeject findiso=$isofile locales=zh_CN.UTF-8<br />
+initrd (loop)/live/initrd.lz<br />
+}<br />
+fi<br />
+	<p>
+		<span style="font-size:14px;line-height:21px;font-family:SimHei;">⑤重启后进入grub2引导iso，进入livecd</span>
+	</p>
+	<p>
+		<span style="font-size:14px;line-height:21px;font-family:SimHei;">⑥安装前卸载iso</span>
+	</p>
+	<p>
+		<span style="font-size:14px;line-height:21px;font-family:SimHei;"><span style="background-color:#CCCCCC;">sudo&nbsp;</span><span style="background-color:#CCCCCC;">um</span><span style="background-color:#CCCCCC;">ount&nbsp;</span><span style="background-color:#CCCCCC;">-l&nbsp;/lib/live/mount/findiso&nbsp;</span></span>
+	</p>
+	<p>
+		<span style="font-size:14px;line-height:21px;font-family:SimHei;"><span style="background-color:#CCCCCC;"><span style="background-color:#FFFFFF;">⑦进行安装</span><br />
+</span></span>
+	</p>
+	<p>
+		<span style="font-size:14px;line-height:21px;font-family:SimHei;"><span style="background-color:#CCCCCC;"><span style="background-color:#FFFFFF;"><span style="background-color:#CCCCCC;">sudo&nbsp;</span><span style="background-color:#CCCCCC;">deepin</span><span style="background-color:#CCCCCC;">-</span><span style="background-color:#CCCCCC;">installer</span><span style="background-color:#CCCCCC;">-reborn</span><span style="background-color:#CCCCCC;">&nbsp;</span></span></span></span>
+	</p>
+<br />
+</span></span>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<p>
+		<span style="color:#232A3C;font-family:微软雅黑, 'Source Han Sans';font-size:14px;background-color:#FFFFFF;"><span style="color:#E53333;font-family:SimHei;">注意：</span><span style="color:#E53333;font-family:SimHei;">menu里的</span><span style="color:#E53333;font-family:SimHei;">vmli</span><span style="color:#E53333;"><span style="font-family:SimHei;">n</span><span style="font-family:SimHei;">uz和</span></span><span style="color:#E53333;font-family:SimHei;">init</span><span style="color:#E53333;font-family:SimHei;">rd</span><span style="color:#E53333;font-family:SimHei;">.</span><span style="color:#E53333;font-family:SimHei;">lz要与提取出来的文件名</span><span style="color:#E53333;font-family:SimHei;">一</span><span style="color:#E53333;font-family:SimHei;">致，</span><span style="color:#E53333;font-family:SimHei;">大</span><span style="color:#E53333;font-family:SimHei;">小</span><span style="color:#E53333;font-family:SimHei;">写一致</span><span style="color:#E53333;font-family:SimHei;">。</span></span>
+	</p>
+	<p>
+		------------------------
+	</p>
+	<p>
+		此日志仅作备忘使用，里面的错漏 / 细节我自己知道即可。
+	</p>
+</p>
+<br />
+<p>
+	<br />
+</p></div><div class="prenextblog"><span class="pages"><a  class="changepage" onclick="preblog('blogs')">上一篇</a>&nbsp&nbsp&nbsp&nbsp<a  class="changepage" onclick="nextblog('blogs')">下一篇</a><span></div></div></td></tr></table></div><div id="bottom"><p>Thanks to github</p></div></body></html>

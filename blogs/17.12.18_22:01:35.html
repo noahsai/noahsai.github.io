@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>qwebview中设置缓存\开启本地数据\重写缓存类获取资源url（如mp3文件）</title><link rel="stylesheet" href="../my.css"><script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><link><script src="../my.js"></script><script type="text/javascript"> window.onresize=clickheight;window.onload=clickheight;</script></head><body  ><div id="top" ><div class="logo" ><a ><img src="../img/1z.png"></a></div><div class="weather" ><iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&color=%23&icon=3&num=5"></iframe></div><ul class="menu" ><li class="item" ><a href="../index.html">首页</a></li><li class="item_current" ><a href="../blogs.html">日志</a></li><li class="item" ><a href="../works.html">作品</a></li><li class="item" ><a href="../helpme.html">求助</a></li><li class="item" ><a href="../about.html">关于</a></li></ul></div><div id="main"><table cellspacing=20px><tr ><td valign=top id="blog_show" class="blogshow"><div class = "showdiv"><div class = "blogtitle"><p class="title_text">qwebview中设置缓存\开启本地数据\重写缓存类获取资源url（如mp3文件）</p><span class='writen_time'>17.12.18_22:16:31</span></div><div class = "blog_text"><p>
+	<span style="font-family:SimHei;font-size:14px;">使用 QNetworkDiskCache</span><br />
+<span style="font-family:SimHei;font-size:14px;"> =================</span><br />
+<span style="font-family:SimHei;font-size:14px;"> QDir().mkpath("/tmp/web-cloud-music");</span><br />
+<span style="font-family:SimHei;font-size:14px;"> mycache *diskCache = new mycache(this);</span><br />
+<span style="font-family:SimHei;font-size:14px;"> //这个是我承继QNetworkDiskCache写的类，用于获取qwebview中mp3格式的链接，下附子类代码 </span> 
+</p>
+<p>
+	<span style="font-family:SimHei;font-size:14px;">diskCache-&gt;setCacheDirectory("/tmp/web-cloud-music");</span><br />
+<span style="font-family:SimHei;font-size:14px;"> diskCache-&gt;setMaximumCacheSize(1024*1024*1024);</span><br />
+<span style="font-family:SimHei;font-size:14px;"> //1G connect(diskCache , SIGNAL(mp3url(QString&amp;)),this , SLOT(gotmp3url(QString&amp;)));</span><br />
+<span style="font-family:SimHei;font-size:14px;"> webview.page()-&gt;networkAccessManager()-&gt;setCache(diskCache);</span><br />
+<span style="font-family:SimHei;font-size:14px;"> //========本地数据=========== </span> 
+</p>
+<p>
+	<span style="font-family:SimHei;font-size:14px;">webview.settings()-&gt;enablePersistentStorage("/home/sss/webmusic");</span><br />
+<span style="font-family:SimHei;font-size:14px;"> webview.settings()-&gt;setAttribute(QWebSettings::LocalStorageEnabled,true);</span><br />
+<span style="font-family:SimHei;font-size:14px;"> webview.settings()-&gt;setLocalStoragePath("/home/sss/webmusic");</span><br />
+<span style="font-family:SimHei;font-size:14px;"> webview.settings()-&gt;setAttribute(QWebSettings::PluginsEnabled,true);</span><br />
+<span style="font-family:SimHei;font-size:14px;"> //flase </span> 
+</p>
+<p>
+	<span style="font-family:SimHei;font-size:14px;">===================mycache类代码==================== </span> 
+</p>
+<p>
+	<span style="font-family:SimHei;font-size:14px;">头文件:</span> 
+</p>
+<p>
+	<span style="font-family:SimHei;font-size:14px;"> class mycache :public QNetworkDiskCache { </span> 
+</p>
+<p>
+	<span style="font-family:SimHei;font-size:14px;">Q_OBJECT public : mycache (QObject *parent = 0);</span><br />
+<span style="font-family:SimHei;font-size:14px;"> ~mycache();</span><br />
+<span style="font-family:SimHei;font-size:14px;"> virtual QIODevice * prepare(const QNetworkCacheMetaData &amp; metaData);</span><br />
+<span style="font-family:SimHei;font-size:14px;"> signals: void mp3url( QString&amp; );</span><br />
+<span style="font-family:SimHei;font-size:14px;"> };</span> 
+</p>
+<p>
+	<br />
+<span style="font-family:SimHei;font-size:14px;"> 源文件： </span> 
+</p>
+<p>
+	<span style="font-family:SimHei;font-size:14px;">mycookiejar ::mycookiejar(QObject * parent ): QNetworkCookieJar( parent ) {</span> 
+</p>
+<p>
+	<span style="font-family:SimHei;font-size:14px;"> } </span> 
+</p>
+<p>
+	<span style="font-family:SimHei;font-size:14px;">mycookiejar::~mycookiejar(){</span> 
+</p>
+<p>
+	<span style="font-family:SimHei;font-size:14px;"> }</span> 
+</p>
+<p>
+	<span style="font-family:SimHei;font-size:14px;"> QListmycookiejar::getallCookies(){ </span> 
+</p>
+<p>
+	<span style="font-family:SimHei;font-size:14px;"> </span><span style="font-family:SimHei;font-size:14px;">QListlist = allCookies();</span><br />
+<span style="font-family:SimHei;font-size:14px;"> </span><span style="font-family:SimHei;font-size:14px;">return list;</span><br />
+<span style="font-family:SimHei;font-size:14px;"> } </span> 
+</p>
+<p>
+	<span style="font-family:SimHei;font-size:14px;">mycache:: mycache(QObject *parent): QNetworkDiskCache(parent) {</span> 
+</p>
+<p>
+	<span style="font-family:SimHei;font-size:14px;"> }</span> 
+</p>
+<p>
+	<span style="font-family:SimHei;font-size:14px;"> mycache::~mycache() {</span> 
+</p>
+<p>
+	<span style="font-family:SimHei;font-size:14px;"> }</span> 
+</p>
+<p>
+	<span style="font-family:SimHei;font-size:14px;"> QIODevice * mycache::prepare(const QNetworkCacheMetaData &amp;metaData){</span> 
+</p>
+<p>
+	<span style="font-family:SimHei;font-size:14px;"> </span><span style="font-family:SimHei;font-size:14px;">QString url = metaData.url().toString();</span><br />
+<span style="font-family:SimHei;font-size:14px;"> </span><span style="font-family:SimHei;font-size:14px;">if(url.indexOf(".mp3") != -1 ) { </span> 
+</p>
+<p>
+	<span style="font-family:SimHei;font-size:14px;"> </span><span style="font-family:SimHei;font-size:14px;">// qDebug()&lt;&lt;"found a mp3:"&lt; emit mp3url( url );</span><br />
+<span style="font-family:SimHei;font-size:14px;"> </span><span style="font-family:SimHei;font-size:14px;">}</span> 
+</p>
+<p>
+	<span style="font-family:SimHei;font-size:14px;"> </span><span style="font-family:SimHei;font-size:14px;">return QNetworkDiskCache :: prepare(metaData) ;</span><br />
+<span style="font-family:SimHei;font-size:14px;"> }</span> 
+</p></div><div class="prenextblog"><span class="pages"><a  class="changepage" onclick="preblog('blogs')">上一篇</a>&nbsp&nbsp&nbsp&nbsp<a  class="changepage" onclick="nextblog('blogs')">下一篇</a><span></div></div></td></tr></table></div><div id="bottom"><p>Thanks to github</p></div></body></html>

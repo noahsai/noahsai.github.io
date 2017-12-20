@@ -1,0 +1,30 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>Qt——QWebView中执行JS脚本</title><link rel="stylesheet" href="../my.css"><script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><link><script src="../my.js"></script><script type="text/javascript"> window.onresize=clickheight;window.onload=clickheight;</script></head><body  ><div id="top" ><div class="logo" ><a ><img src="../img/1z.png"></a></div><div class="weather" ><iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&color=%23&icon=3&num=5"></iframe></div><ul class="menu" ><li class="item" ><a href="../index.html">首页</a></li><li class="item_current" ><a href="../blogs.html">日志</a></li><li class="item" ><a href="../works.html">作品</a></li><li class="item" ><a href="../helpme.html">求助</a></li><li class="item" ><a href="../about.html">关于</a></li></ul></div><div id="main"><table cellspacing=20px><tr ><td valign=top id="blog_show" class="blogshow"><div class = "showdiv"><div class = "blogtitle"><p class="title_text">Qt——QWebView中执行JS脚本</p><span class='writen_time'>17.12.18_22:56:24</span></div><div class = "blog_text"><p>
+	<br />
+<span style="font-size:12px;font-family:SimHei;"> 现在说的这个是旧的方法，用的QWebView，新版qt用的QWebEngineView</span><br />
+<span style="font-size:12px;font-family:SimHei;"> ==============[连接信号，适时传递对象]================</span><br />
+<span style="font-size:12px;font-family:SimHei;"> connect(webview.page()-&gt;mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(setslottoweb()));</span>
+</p>
+<p>
+	<span style="font-size:12px;font-family:SimHei;">//qt推荐的，不过这样用貌似也没事，setslottoweb()是自己写的函数，用来传递对象给网页的。你也可以设置在qwebview的loadFinished时调用。</span><br />
+<span style="font-size:12px;font-family:SimHei;"> void webmusic::setslottoweb()</span><br />
+<span style="font-size:12px;font-family:SimHei;"> {</span><br />
+<span style="font-size:12px;font-family:SimHei;"> webview.page()-&gt;mainFrame()-&gt;addToJavaScriptWindowObject("mywebview",this);</span><br />
+<span style="font-size:12px;font-family:SimHei;"> //"mywebview" 随你定义，是网页用的对象名。两个参数的意思是当前对象(this)在网页中的名字是"mywebview"，调用"mywebview"的方法就是调用this的方法(调用时函数名，参数类型需要一致)。</span><br />
+<span style="font-size:12px;font-family:SimHei;"> }</span>
+</p>
+<p>
+	<br />
+<span style="font-size:12px;font-family:SimHei;"> ================[qt中调用js脚本]=========================</span><br />
+<span style="font-size:12px;font-family:SimHei;"> webview.page()-&gt;mainFrame()-&gt;evaluateJavaScript("a = document.getElementsByClassName('icn icn-list')[0];alert(a);");</span><br />
+<span style="font-size:12px;font-family:SimHei;"> //参数里可以写任意js代码，只要你保证代码无误，不过我好像调用不了jq，所以我一直用纯js写。另外注意代码中带转义符号的，如\n,\t,\\，这些在qt中需要再转义\\n,\\t,\\\\，否则\n传到js里就不是\n了，会被qt转为换行符的。</span>
+</p>
+<p>
+	<br />
+<span style="font-size:12px;font-family:SimHei;"> ================[网页中调用qt函数]=========================</span><br />
+<br />
+<span style="font-size:12px;font-family:SimHei;"> js中调用：mywebview.xxxx(yyyy);// 终于参数类型与qt中的一致，如普通函数一样使用即可。</span><br />
+<span style="font-size:12px;font-family:SimHei;"> 1.假如这个网页是你自己写的，那你写网页时就可以直接用"mywebview"这个你将会在qt传递过来的对象了，只要保证对象名和qt将要传过来的一致即可。</span><br />
+<span style="font-size:12px;font-family:SimHei;"> 2.假如是其他网页，你可以使用上面qt调用js脚本的方法插入你需要的函数，在函数中调用即可，但需要注意，网页跳转后或许需重新插入，插入时机自己判断。</span><br />
+<br />
+<br />
+</p></div><div class="prenextblog"><span class="pages"><a  class="changepage" onclick="preblog('blogs')">上一篇</a>&nbsp&nbsp&nbsp&nbsp<a  class="changepage" onclick="nextblog('blogs')">下一篇</a><span></div></div></td></tr></table></div><div id="bottom"><p>Thanks to github</p></div></body></html>

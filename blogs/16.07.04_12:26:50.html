@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>[教程]我平时用的deb安装包打包方法</title><link rel="stylesheet" href="../my.css"><script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><link><script src="../my.js"></script><script type="text/javascript"> window.onresize=clickheight;window.onload=clickheight;</script></head><body  ><div id="top" ><div class="logo" ><a ><img src="../img/1z.png"></a></div><div class="weather" ><iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&color=%23&icon=3&num=5"></iframe></div><ul class="menu" ><li class="item" ><a href="../index.html">首页</a></li><li class="item_current" ><a href="../blogs.html">日志</a></li><li class="item" ><a href="../works.html">作品</a></li><li class="item" ><a href="../helpme.html">求助</a></li><li class="item" ><a href="../about.html">关于</a></li></ul></div><div id="main"><table cellspacing=20px><tr ><td valign=top id="blog_show" class="blogshow"><div class = "showdiv"><div class = "blogtitle"><p class="title_text">[教程]我平时用的deb安装包打包方法</p><span class='writen_time'>16.07.04_12:29:09</span></div><div class = "blog_text"><p>
+	该教程不确保是真正的deb打包方法，只是我平时这样用的而已。反正能用。
+</p>
+<p>
+	-----------------------------------------------【打包文件结构】--------------------------------------------------
+</p>
+<p>
+	<span style="font-size:16px;color:#009900;">①新建一个文件夹用来存放程序所需的文件</span> 
+</p>
+<p>
+	<img src="../blogs/16.07.04_12:26:50/深度截图20160704104713.png" alt="" /> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<span><span style="line-height:24px;">②建立DEBIAN文件夹和实际所需的文件夹</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;"><img src="../blogs/16.07.04_12:26:50/深度截图20160704110342.png" alt="" /><br />
+</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;"><br />
+</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;">③创建编写control文件</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;"><span style="color:#FF9900;font-size:medium;line-height:24px;">Package:包名字，决定了就别乱改</span><br />
+<span style="color:#FF9900;font-size:medium;line-height:24px;">Version:版本</span><br />
+<span style="color:#FF9900;font-size:medium;line-height:24px;">Section:类型之类，百度吧</span><br />
+<span style="color:#FF9900;font-size:medium;line-height:24px;">Priority:optional</span><br />
+<span style="color:#FF9900;font-size:medium;line-height:24px;">Maintainer:作者&lt;邮箱&gt;</span></span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;"><span style="color:#FF9900;font-size:medium;line-height:24px;">Depends:依赖</span><br />
+<span style="color:#FF9900;font-size:medium;line-height:24px;">Architecture:amd64或者i386</span><br />
+<span style="color:#FF9900;font-size:medium;line-height:24px;">Installed-Size:程序大小</span><br />
+<span style="color:#FF9900;font-size:medium;line-height:24px;">Description:程序介绍</span><span style="color:#FF9900;"></span><br />
+</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;"><img src="../blogs/16.07.04_12:26:50/深度截图20160704110441.png" alt="" /><br />
+</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;"><img src="../blogs/16.07.04_12:26:50/深度截图20160704112438.png" alt="" /><br />
+</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;"><br />
+</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;">④按照实际安装位置 创建一系列所需的文件夹，将程序文件等放到对应位置</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;"><img src="../blogs/16.07.04_12:26:50/深度截图20160704112914.png" alt="" /><br />
+</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;"><img src="../blogs/16.07.04_12:26:50/深度截图20160704113346.png" alt="" /><br />
+</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;"><br />
+</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;">-------------------------------------【创建对应的快捷方式】---------------------------------</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;">①新建一个.desktop 文件，打开</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;"><img src="../blogs/16.07.04_12:26:50/深度截图20160704113832.png" alt="" /><br />
+</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;"><br />
+</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;">②填入一下相应信息，保存，修改为可执行文件。</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;"><span style="color:#FF9900;"></span><span style="color:#FF9900;">[Desktop Entry]</span><br />
+<span style="color:#FF9900;">Encoding=UTF-8</span><br />
+<span style="color:#FF9900;">Exec=安装后程序的绝对路径</span><br />
+<span style="color:#FF9900;">Name=程序名</span><br />
+<span style="color:#FF9900;">Name[zh_CN]=程序中文名称</span><br />
+<span style="color:#FF9900;">StartupNotify=false</span><br />
+<span style="color:#FF9900;">Comment=程序描述</span><br />
+<span style="color:#FF9900;">Icon=安装后程序图标的绝对路径</span><br />
+<span style="color:#FF9900;">Terminal=false</span><br />
+<span style="color:#FF9900;">Type=Application</span><br />
+<span style="color:#FF9900;">Categories=程序类别，百度吧</span><br />
+<br />
+</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;"><img src="../blogs/16.07.04_12:26:50/深度截图20160704114316.png" alt="" /><br />
+</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;"><img src="../blogs/16.07.04_12:26:50/深度截图20160704114601.png" alt="" /><br />
+</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;"><img src="../blogs/16.07.04_12:26:50/深度截图20160704114703.png" alt="" /><br />
+</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;"><br />
+</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;">---------------------------------【进行打包】----------------------------</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;">返回存放程序文件的那个文件夹的位置，例如我用tianqi文件夹存放文件的，我的tianqi文件夹是在‘新建文件夹’里的，</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;">那么就返回到‘新建文件夹’里面。</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;">使用：</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;color:#E53333;">dpkg -b &nbsp;文件夹 &nbsp; 生产的文件名.deb</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;">具体看图：</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;"><img src="../blogs/16.07.04_12:26:50/深度截图20160704115114.png" alt="" /><br />
+</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;"><img src="../blogs/16.07.04_12:26:50/深度截图20160704120159.png" alt="" /><br />
+</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;"><br />
+</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;">完成。</span></span> 
+</p>
+<p>
+	<span><span style="line-height:24px;"><br />
+</span></span> 
+</p>
+<p>
+	<br />
+</p></div><div class="prenextblog"><span class="pages"><a  class="changepage" onclick="preblog('blogs')">上一篇</a>&nbsp&nbsp&nbsp&nbsp<a  class="changepage" onclick="nextblog('blogs')">下一篇</a><span></div></div></td></tr></table></div><div id="bottom"><p>Thanks to github</p></div></body></html>
