@@ -1,0 +1,125 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>为QLineEdit添加输入限制,为Validator类添加错误信号</title><link rel="stylesheet" href="../my.css"><script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><link><script src="../my.js"></script><script type="text/javascript"> window.onresize=clickheight;window.onload=clickheight;</script></head><body  ><div id="top" ><div class="logo" ><a ><img src="../img/1z.png"></a></div><div class="weather" ><iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&color=%23&icon=3&num=5"></iframe></div><ul class="menu" ><li class="item" ><a href="../index.html">首页</a></li><li class="item_current" ><a href="../blogs.html">日志</a></li><li class="item" ><a href="../works.html">作品</a></li><li class="item" ><a href="../helpme.html">求助</a></li><li class="item" ><a href="../about.html">关于</a></li></ul></div><div id="main"><table cellspacing=20px><tr ><td valign=top id="blog_show" class="blogshow"><div class = "showdiv"><div class = "blogtitle"><p class="title_text">为QLineEdit添加输入限制,为Validator类添加错误信号</p><span class='writen_time'>17.12.22_13:10:39</span></div><div class = "blog_text"><p>
+	看到有QLineEdit输入限制的问题，正好今天无其他事，也顺道研究了一下。
+</p>
+<p>
+	要求是在不符合要求的字符在输入前就要弹出提示框。
+</p>
+<p>
+	<span>qlineedit的限制，</span>通常情况下我是直接连接信号自己判断写函数，然后再弹出提示框的。再不就是继承qlineedit自己封装一个带提示框的。如果需要做到要求的那样，就干脆判断完再删除错误的输入字符，达到伪效果。
+</p>
+<p>
+	不过，这次通过百度，知道了用validator类可以达到qlineedit自带限制功能，这样无疑对自己是一种提升。
+</p>
+<p>
+	因此，我也决定深入一下validator这个类，看看有没有更方便，更有可持续发展的方法解决这个问题。
+</p>
+<p>
+	现在先来说说validator这个类的使用方法。
+</p>
+<p>
+	按照文档所说，validator是一个基类，qt自带了4种，判断字符串那我当然是选择<span>QRegularExpressionValidator</span> 
+</p>
+<p>
+	<span>于是我基于<span>QRegularExpressionValidator写了</span><span>MyQRegularExpressionValidator，用一模一样的，只是多了个errorinput()信号。</span></span> 
+</p>
+<p>
+	<span>下面</span> 
+</p>
+<p>
+	==================QLIneEdit使用validator实现限制输入================
+</p>
+<p>
+	<strong>QLineEdit *line = new QLineEdit(this);</strong><br />
+<strong>this-&gt;setCentralWidget(line);</strong><br />
+<strong>QRegularExpressionValidator *validator = new QRegularExpressionValidator(this);</strong><br />
+<strong>QRegularExpression reg("\\d\\d\\d\\d");</strong><br />
+<strong>validator-&gt;setRegularExpression(reg);</strong><br />
+<strong>line-&gt;setValidator( validator);</strong> 
+</p>
+<p>
+	====================================
+</p>
+<p>
+	上面就使用qt自带的<span>QRegularExpressionValidator类快捷的实现了限制输入的功能了</span> 
+</p>
+<p>
+	<span style="line-height:1.5;">下面是我继承<span>QRegularExpressionValidator写的</span></span><strong><span>MyQRegularExpressionValidator</span></strong><strong></strong> 
+</p>
+<p>
+	===============头文件h===================
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<strong>#ifndef MYQREGULAREXPRESSIONVALIDATOR_H</strong><br />
+<strong>#define MYQREGULAREXPRESSIONVALIDATOR_H</strong><br />
+<strong>#include</strong><br />
+<strong>//#include</strong><br />
+<strong>//#include</strong><br />
+<strong>class MyQRegularExpressionValidator : public QRegularExpressionValidator</strong><br />
+<strong>{</strong><br />
+<strong> Q_OBJECT</strong><br />
+<strong>public:</strong><br />
+<strong> MyQRegularExpressionValidator(QObject * parent = 0);</strong><br />
+<strong> ~MyQRegularExpressionValidator();</strong><br />
+<strong> QValidator::State	validate(QString &amp; input, int &amp; pos) const;//实验证明必须带const才能正确重写</strong><br />
+<br />
+<strong>signals:</strong><br />
+<strong> void errorinput();</strong><br />
+<strong>};</strong><br />
+<br />
+<strong>#endif // MYQREGULAREXPRESSIONVALIDATOR_H</strong> 
+</p>
+<p>
+	===============源文件cpp======================
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<strong>#include "myqregularexpressionvalidator.h"</strong><br />
+<br />
+<strong>MyQRegularExpressionValidator::MyQRegularExpressionValidator(QObject * parent ):</strong><br />
+<strong> QRegularExpressionValidator( parent )</strong><br />
+<strong>{</strong><br />
+<br />
+<strong>}</strong><br />
+<strong>MyQRegularExpressionValidator::~MyQRegularExpressionValidator()</strong><br />
+<strong>{</strong><br />
+<br />
+<strong>}</strong><br />
+<br />
+<strong> QValidator::State MyQRegularExpressionValidator::	validate(QString &amp; input, int &amp; pos)const <strong>//实验证明必须带const</strong></strong><br />
+<strong>{</strong><br />
+<strong> QValidator::State s = QRegularExpressionValidator::validate(input , pos);//使用<strong>QRegularExpressionValidator原本的函数</strong>进行对比</strong><br />
+<strong> if( s == QValidator::Invalid) emit errorinput(); //不正确就发信号</strong><br />
+<strong> return s;</strong><br />
+<strong>}</strong> 
+</p>
+<div>
+	<br />
+</div>
+<p>
+	=================使用例子============================
+</p>
+<p>
+	<strong> QLineEdit *line = new QLineEdit(this);</strong><br />
+<strong> this-&gt;setCentralWidget(line);</strong><br />
+<strong> MyQRegularExpressionValidator *validator = new MyQRegularExpressionValidator(this);</strong><br />
+<strong> QRegularExpression reg("\\d\\d\\d\\d");</strong><br />
+<strong> validator-&gt;setRegularExpression(reg);</strong><br />
+<strong> line-&gt;setValidator( validator);</strong><br />
+<strong> connect(validator , SIGNAL(errorinput()) , this ,SLOT(show_errordialog()));</strong><br />
+<strong> line-&gt;show();</strong><br />
+====================================================
+</p>
+<p>
+	这样以后只要使用这个类，就可以为不同QLineEdit实现错误输入前提示错误对话框了（虽然我觉得没必要，个人偏向于输入完成后再进行提示，配合tooltip提示，这样能减少弹窗对用户的骚扰。）
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p></div><div class="prenextblog"><span class="pages"><a  class="changepage" onclick="preblog('blogs')">上一篇</a>&nbsp&nbsp&nbsp&nbsp<a  class="changepage" onclick="nextblog('blogs')">下一篇</a><span></div></div></td></tr></table></div><div id="bottom"><p>Thanks to github</p></div></body></html>
