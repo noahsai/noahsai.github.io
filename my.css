@@ -240,13 +240,15 @@ text-align: center;
 .helpme
 {
 width:100%;
-position:absolute;
-top:30%;
-background-color:red;
+background-color:#DC143C88;
 color:white;
 text-align: center;  
 font-size:100px;
 font-weight:bold;
+}
+.helpme>img
+{
+width:350px;
 }
 
 .about
