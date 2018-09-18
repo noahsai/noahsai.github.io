@@ -1,4 +1,16 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>网页云音乐</title><link rel="stylesheet" href="../my.css"><script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><link><script src="../my.js"></script><script type="text/javascript"> window.onresize=clickheight;window.onload=clickheight;</script></head><body  ><div id="top" ><div class="logo" ><a ><img src="../img/1z.png"></a></div><div class="weather" ><iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&color=%23&icon=3&num=5"></iframe></div><ul class="menu" ><li class="item" ><a href="../index.html">首页</a></li><li class="item" ><a href="../blogs.html">日志</a></li><li class="item_current" ><a href="../works.html">作品</a></li><li class="item" ><a href="../helpme.html">求助</a></li><li class="item" ><a href="../about.html">关于</a></li></ul></div><div id="main"><table cellspacing=20px><tr ><td valign=top id="blog_show" class="blogshow"><div class = "showdiv"><div class = "blogtitle"><p class="title_text">网页云音乐</p><span class='writen_time'>17.12.20_22:52:48</span></div><div class = "blog_text"><h2 style="color:#24292E;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>网页云音乐</title><link rel="stylesheet" href="../my.css"><script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><link><script src="../my.js"></script><script type="text/javascript"> window.onresize=clickheight;window.onload=clickheight;</script></head><body  ><div id="top" ><div class="logo" ><a ><img src="../img/1z.png"></a></div><div class="weather" ><iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&color=%23&icon=3&num=5"></iframe></div><ul class="menu" ><li class="item" ><a href="../index.html">首页</a></li><li class="item" ><a href="../blogs.html">日志</a></li><li class="item_current" ><a href="../works.html">作品</a></li><li class="item" ><a href="../helpme.html">求助</a></li><li class="item" ><a href="../about.html">关于</a></li></ul></div><div id="main"><table cellspacing=20px><tr ><td valign=top id="blog_show" class="blogshow"><div class = "showdiv"><div class = "blogtitle"><p class="title_text">网页云音乐</p><span class='writen_time'>18.09.18_23:17:43</span></div><div class = "blog_text"><h2 style="color:#24292E;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
+	<span style="font-size:12px;font-weight:normal;line-height:18px;">已经切换到qwebengine，个人感觉以前的webkit更好操作点，现在没简便方法直接网页里调用c++了</span>
+</h2>
+<p>
+	<span style="font-size:12px;font-weight:normal;line-height:18px;">解决了歌词调大后出现的bug，缓存变为播放记录，网页也不作修改了，内置高音质脚本及开关</span>
+</p>
+<p>
+	歌词的获取还存在一点逻辑性的bug，忘记修了，如出现隐藏窗口后无歌词更新，请手动在网页中打开歌词界面再隐藏窗口。
+</p>
+<h2 style="color:#24292E;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
+	<span style="font-size:12px;font-weight:normal;line-height:1.5;">===============</span>
+</h2>
+<h2 style="color:#24292E;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
 	用qt封装的网页版网易云音乐。主要是添加以下功能：
 </h2>
 <p style="color:#24292E;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';font-size:16px;">
@@ -11,7 +23,7 @@
 	<a href="https://github.com/noahsai/web-cloud-music#制作初衷" class="anchor" id="user-content-制作初衷"></a>制作初衷
 </h2>
 <p style="color:#24292E;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';font-size:16px;">
-	由于官方与别人合作制作的linux版网易云音乐在mint中只能sudo运行，而且又进入万年无人维护状态，所以平时使用网页版居多。但是习惯了使用桌面歌词，没有歌词实在不爽，网页有时也会因失手被关闭，所以干脆研究了一下qt能不能封装网页版云音乐。后来发现云音乐并不是使用flash的，真是良心，在qt自带旧版浏览器也能正常使用云音乐。因此就一步步探索，按照预期的构思，封装好这个带歌词和缓存的网页版的云音乐了。
+	由于官方与别人合作制作的linux版网易云音乐在mint中只能sudo运行，而且又进入万年无人维护状态，所以平时使用网页版居多。但是习惯了使用桌面歌词，没有歌词实在不爽，网页有时也会因失手被关闭，所以干脆研究了一下qt能不能封装网页版云音乐。后来发现云音乐并不是使用flash的，真是良心，在qt自带旧版浏览器也能正常使用云音乐。因此就一步步探索，按照预期的构思，封装好这个带歌词和播放记录的网页版的云音乐了。
 </p>
 <h2 style="color:#24292E;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';">
 	效果图/源码地址：
