@@ -1,8 +1,93 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>度良日历</title><link rel="stylesheet" href="../my.css"><script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><link><script src="../my.js"></script><script type="text/javascript"> window.onresize=clickheight;window.onload=clickheight;</script></head><body  ><div id="top" ><div class="logo" ><a ><img src="../img/1z.png"></a></div><div class="weather" ><iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&color=%23&icon=3&num=5"></iframe></div><ul class="menu" ><li class="item" ><a href="../index.html">首页</a></li><li class="item" ><a href="../blogs.html">日志</a></li><li class="item_current" ><a href="../works.html">作品</a></li><li class="item" ><a href="../helpme.html">求助</a></li><li class="item" ><a href="../about.html">关于</a></li></ul></div><div id="main"><table cellspacing=20px><tr ><td valign=top id="blog_show" class="blogshow"><div class = "showdiv"><div class = "blogtitle"><p class="title_text">度良日历</p><span class='writen_time'>18.07.17_00:30:56</span></div><div class = "blog_text"><p>
-	项目地址：https://github.com/noahsai/rili
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>度良日历V1.0</title><link rel="stylesheet" href="../my.css"><script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><link><script src="../my.js"></script><script type="text/javascript"> window.onresize=clickheight;window.onload=clickheight;</script></head><body  ><div id="top" ><div class="logo" ><a ><img src="../img/1z.png"></a></div><div class="weather" ><iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&color=%23&icon=3&num=5"></iframe></div><ul class="menu" ><li class="item" ><a href="../index.html">首页</a></li><li class="item" ><a href="../blogs.html">日志</a></li><li class="item_current" ><a href="../works.html">作品</a></li><li class="item" ><a href="../helpme.html">求助</a></li><li class="item" ><a href="../about.html">关于</a></li></ul></div><div id="main"><table cellspacing=20px><tr ><td valign=top id="blog_show" class="blogshow"><div class = "showdiv"><div class = "blogtitle"><p class="title_text">度良日历V1.0</p><span class='writen_time'>18.10.03_00:28:54</span></div><div class = "blog_text"><p>
+	<strong><span style="font-size:14px;background-color:#FFE500;color:#000000;">项目地址：https://github.com/noahsai/rili</span></strong> 
 </p>
 <p>
-	<br />
+	18.10.03
+</p>
+<p>
+	优化了节假日加载逻辑，侧栏数据加载逻辑
+</p>
+<p>
+	终于增加了日程提醒功能。
+</p>
+<p>
+	<span style="color:#E53333;">日程功能使用：</span> 
+</p>
+<p>
+	<span style="color:#E53333;">1.有日程的日期会有蓝色圈标记。</span> 
+</p>
+<p>
+	<span style="color:#E53333;">2.双击日期会弹出新建日程对话框，双击</span><span><span style="color:#E53333;">或侧栏的日程</span><span style="color:#E53333;">会弹出修改日程对话框</span><span style="color:#E53333;"></span></span><span style="color:#E53333;">。</span> 
+</p>
+<p>
+	<span style="color:#E53333;">3.点击侧栏“日程“可查看当前日期日程，点击”黄历“返回黄历节面</span> 
+</p>
+<p>
+	<span style="color:#E53333;">4.点击”全部“显示全部拥有日程的日期，双击可查看该日具体日程。</span> 
+</p>
+<p>
+	<span style="color:#003399;">日程种类：</span> 
+</p>
+<p>
+	<span style="color:#003399;">1.当天。</span> 
+</p>
+<p>
+	<span style="color:#003399;">2.每年。</span> 
+</p>
+<p>
+	<span style="color:#003399;">3.每月。</span> 
+</p>
+<p>
+	<span style="color:#003399;">4.每几天。</span> 
+</p>
+<p>
+	<span style="color:#009900;background-color:#FFFFFF;">日程设置：</span> 
+</p>
+<p>
+	<span style="color:#009900;background-color:#FFFFFF;">1.日期不可手动修改，需要改日期只需要直接在日历里点击该日期，无需关闭设置节目，直接点击即可。</span> 
+</p>
+<p>
+	<span style="color:#009900;background-color:#FFFFFF;">2.时间手动调整时和分，可用滚轮，但是时和分不能互动。</span> 
+</p>
+<p>
+	<span style="color:#009900;background-color:#FFFFFF;">3.日程事件随意填写，但不能换行，建议简短提醒。</span> 
+</p>
+<p>
+	<span style="color:#009900;background-color:#FFFFFF;">4.铃声和命令：</span> 
+</p>
+<p>
+	<span style="color:#009900;background-color:#FFFFFF;"> a.如果填写的是音乐文件，那提醒时就是该音乐作为铃声。</span> 
+</p>
+<p>
+	<span style="color:#009900;background-color:#FFFFFF;"> b.如果填写的是命令或可执行文件，那将尝试执行该命令或程序，但是铃声提醒照样会响！</span><span style="color:#009900;background-color:#FFFFFF;">。不保证能都运行，只简单测试了一下。</span> 
+</p>
+<p>
+	<span style="color:#009900;background-color:#FFFFFF;">5.持续时间，铃声提示的持续时间。最大600s。</span> 
+</p>
+<p>
+	<span style="color:#009900;background-color:#FFFFFF;">6.周期：当天，每年，每月，数日。数日最大可设置366</span> 
+</p>
+<p>
+	<span style="color:#009900;background-color:#FFFFFF;">7.图片：选填项，默认空，最好选择120x150或该比例的的图片。</span> 
+</p>
+<p>
+	<span style="color:#009900;background-color:#FFFFFF;"><img src="../works/18.07.17_00:30:43/截图_2018-10-02_23-56-55.png" alt="" /><br />
+</span> 
+</p>
+<p>
+	<span style="color:#009900;background-color:#FFFFFF;"><img src="../works/18.07.17_00:30:43/截图_2018-10-02_23-56-30.png" alt="" /><br />
+</span> 
+</p>
+<p>
+	<span style="color:#009900;background-color:#FFFFFF;"><img src="../works/18.07.17_00:30:43/截图_2018-10-02_23-58-11.png" alt="" /><br />
+</span> 
+</p>
+<p>
+	<span style="color:#009900;background-color:#FFFFFF;"><br />
+</span> 
+</p>
+<p>
+	//============================
 </p>
 <p>
 	搬运百度网页的日历
