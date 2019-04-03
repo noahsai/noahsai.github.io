@@ -1,0 +1,102 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>题检——简单的答题软件</title><link rel="stylesheet" href="../my.css"><script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><link><script src="../my.js"></script><script type="text/javascript"> window.onresize=clickheight;window.onload=clickheight;</script></head><body  ><div id="top" ><div class="logo" ><a ><img src="../img/1z.png"></a></div><div class="weather" ><iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&color=%23&icon=3&num=5"></iframe></div><ul class="menu" ><li class="item" ><a href="../index.html">首页</a></li><li class="item" ><a href="../blogs.html">日志</a></li><li class="item_current" ><a href="../works.html">作品</a></li><li class="item" ><a href="../helpme.html">求助</a></li><li class="item" ><a href="../about.html">关于</a></li></ul></div><div id="main"><table cellspacing=20px><tr ><td valign=top id="blog_show" class="blogshow"><div class = "showdiv"><div class = "blogtitle"><p class="title_text">题检——简单的答题软件</p><span class='writen_time'>19.04.03_23:05:35</span></div><div class = "blog_text"><p>
+	因为某些原因，需要一个答题软件来应付单选多选和判断题的考试。虽然最后因为运气不好，这个软件还未出世就轮到我了。
+</p>
+<p>
+	为了将来着想，还是得做这个软件以备不时之需。
+</p>
+<p>
+	如图片所示，功能有：
+</p>
+<p>
+	1.开始做题，能够自定义题目数量;
+</p>
+<p>
+	2.错题重做，将你错的题作为题库，只靠你错的题。错题重做时答对的题目就会从错题中去除。
+</p>
+<p>
+	3.错题集，以题库的形式显示错题。
+</p>
+<p>
+	4.题库，现实所有题目。
+</p>
+<p>
+	5.选择题库，此功能是选择曾经导入过的题库，选取题库的文件夹即可。
+</p>
+<p>
+	6.导入题库，导入指定格式的csv表格文件。
+</p>
+<p>
+	7.管理题库，删去对应的文件夹即可删去该题库。
+</p>
+<p>
+	8.题库和错题集的字体大小调节和夜间模式。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	由于我的题库很简单，所以软件不支持带图片的题目，只支持纯文字题目。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	关于csv表格文件的格式：
+</p>
+<p>
+	csv表格可以用表格软件编辑和生成。我用的libreoffice，见截图。
+</p>
+<p>
+	<span style="background-color:#FFE500;font-size:14px;">生存时：</span> 
+</p>
+<p>
+	<span style="background-color:#FFE500;font-size:14px;">1.单选和多选必须要有7列，判断要有6列。</span> 
+</p>
+<p>
+	<span style="background-color:#FFE500;font-size:14px;">2.单选题第一列必须包涵“单”字，多选题包涵“多”字，判断题包涵“判字”，不是题目的行就不要包涵这三个字。</span> 
+</p>
+<p>
+	<span style="background-color:#FFE500;font-size:14px;">3.多选的答案要用#作为分隔。</span> 
+</p>
+<p>
+	<span style="background-color:#FFE500;font-size:14px;">4.判断题的答案必须是第5列为中文答案，第六列为英文答案。</span> 
+</p>
+<p>
+	<span style="background-color:#FFE500;font-size:14px;">5.答案的ABCD必须是大写！</span> 
+</p>
+<p>
+	<span style="background-color:#FFE500;font-size:14px;">6.导出时“字段分隔符”必须是“制表符”！！，“文本分隔符”必须填$符号（shift+4那个美元符号）</span> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<span style="background-color:#FFE500;font-size:14px;">编辑时：</span> 
+</p>
+<p>
+	<span style="background-color:#FFE500;font-size:14px;">1.打开csv表格文件时，选“分隔”，下面必须只勾选“制表符”一个选项！！文本分隔符填$符号。</span> 
+</p>
+<p>
+	<span style="background-color:#FFE500;font-size:14px;"><br />
+</span> 
+</p>
+<p>
+	<span style="background-color:#FFE500;font-size:14px;"><img src="../works/19.04.03_23:05:22/截图_2019-04-03_22-33-51.png" alt="" /><br />
+</span> 
+</p>
+<p>
+	<span style="background-color:#FFE500;font-size:14px;"><br />
+</span> 
+</p>
+<p>
+	<span style="background-color:#FFE500;font-size:14px;"><img src="../works/19.04.03_23:05:22/截图_2019-04-03_22-37-16.png" alt="" /><br />
+</span> 
+</p>
+<p>
+	<span style="background-color:#FFE500;font-size:14px;"><br />
+</span> 
+</p>
+<p>
+	<span style="background-color:#FFE500;font-size:14px;"><img src="../works/19.04.03_23:05:22/截图_2019-04-03_22-38-07.png" alt="" /><br />
+</span> 
+</p></div><div class="prenextblog"><span class="pages"><a  class="changepage" onclick="preblog('works')">上一篇</a>&nbsp&nbsp&nbsp&nbsp<a  class="changepage" onclick="nextblog('works')">下一篇</a><span></div></div></td></tr></table></div><div id="bottom"><p>Thanks to github</p></div></body></html>
