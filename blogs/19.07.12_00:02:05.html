@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>记菜鸟debian9升10血案[一]：升完重启黑屏</title><link rel="stylesheet" href="../my.css"><script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><link><script src="../my.js"></script><script type="text/javascript"> window.onresize=clickheight;window.onload=clickheight;</script></head><body  ><div id="top" ><div class="logo" ><a ><img src="../img/1z.png"></a></div><div class="weather" ><iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&color=%23&icon=3&num=5"></iframe></div><ul class="menu" ><li class="item" ><a href="../index.html">首页</a></li><li class="item_current" ><a href="../blogs.html">日志</a></li><li class="item" ><a href="../works.html">作品</a></li><li class="item" ><a href="../helpme.html">求助</a></li><li class="item" ><a href="../about.html">关于</a></li></ul></div><div id="main"><table cellspacing=20px><tr ><td valign=top id="blog_show" class="blogshow"><div class = "showdiv"><div class = "blogtitle"><p class="title_text">记菜鸟debian9升10血案[一]：升完重启黑屏</p><span class='writen_time'>19.07.12_00:42:18</span></div><div class = "blog_text"><p>
+	虽然用了近10年linux，但并不妨碍我是一只菜鸟。
+</p>
+<p>
+	事发起因：以为自己人品不差，9升10不会出问题。
+</p>
+<p>
+	过程：网上找教程，改源，update &amp;&amp; dist-upgrade。
+</p>
+<p>
+	结果：重启黑屏GG。
+</p>
+<p>
+	抢救流程：
+</p>
+<p>
+	进入tty，可以，用命令启动xfce4,失败，用su启动时发现有个库提示类似类似版本不对的信息。我就知道应该是自己之前手动安装某些软件是搞出来的祸。
+</p>
+<p>
+	但是没头绪，一顿乱搞，卸载这卸载那的，最后发现连网都上不了了，终极GG，幸亏我还用大法。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	为了方便医治这匹死马，先祭出“windows虚拟机启动实体linux大法”，就是在windows下使用vbox虚拟机加载实体硬盘启动里面的linux，方便一边上网一边修复linux。
+</p>
+<p>
+	然后为了解决被我搞到linux上不了网的问题，再祭出systemd自带网络连接systemd-network大法，因为有过前科，所以之前就学会这个工具。
+</p>
+<p>
+	两大法使用后，就可以开始疯狂尝试各种方法了，在此期间脑海中‘重装吧’和‘再试试吧’两种情绪不断交替。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	接着在前版本不对的提示，疯狂百度还是让我找到了一个熟悉的名字，infinality！
+</p>
+<p>
+	没错，就是之前贪玩尝试的字体美化软件，是手动安装的。但是发现相关的libfreetype6包卸载不了，后来手动将他删除。事情就开始恶化了....
+</p>
+<p>
+	另外一提，因为以前设置的原因，使tty里的提示是中文，但tty显示不了中文，现实的是框框，这就让我失去了很多重要的信息....
+</p>
+<p>
+	再另外...本来我可以使用fbterm来显示中文的，但是因为我这波煞笔操作，fbterm也启动不了了，然后导致我后面长时间的瞎猜。。。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	然后我用wget下了这个官方的包回来，发现dpkg安装不了（其实是中文乱码的问题导致我不知道为何装不了...），接着就手动安装好它了
+</p>
+<p>
+	尝试启动xfce4时又发现找不到libpng12.so.0找不到了，明显是因为之前瞎搞时乱卸载东西了，又下载了回来，也是需要手动安装
+</p>
+<p>
+	这时我用fbterm才知道原来dpkg安装不了软件是因为su里PATH环境没设置好的缘故，这是重新将libfreetype6和libpng12-0的包安装一次
+</p>
+<p>
+	<br />
+</p>
+<p>
+	再尝试启动xfce4发现还是不行，但已经有点图形界面了，又开始瞎搞了，重新安装一下lightdm，然后重启试试，诶，发现可以进桌面了～～
+</p>
+<p>
+	至此，血案一就完结了，总共历时6个小时左右。。。。。。全程靠‘再试试吧’来坚持。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	事故分析：
+</p>
+<p>
+	瞎搞和瞎搞。
+</p>
+<p>
+	使用9时不安分，瞎搞手动安装了一下非官方包，导致更新后进入桌面失败。
+</p>
+<p>
+	修复系统时没头绪时瞎搞，卸载这卸载那导致一些低版本的包给我下载没了，需要重新从官网下载回来，当然也有很有可能是我不会直接apt旧版本的软件而已。
+</p>
+<p>
+	<br />
+</p>
+<p>
+	记录：
+</p>
+<p>
+	使用vbox生成实体硬盘的文件。方法来自百度，多块硬盘的需要注意自己PHYSICALDRIVE后面的值
+</p>
+<p>
+	<br />
+</p>
+<pre>C:\<span class="hljs-keyword">Program</span> Files\Oracle\VirtualBox\VBoxManage.exe internalcommands createrawvmdk -filename D:\truedisk.vmdk -rawdisk \\.\PHYSICALDRIVE0</pre>
+<p>
+	<br />
+</p></div><div class="prenextblog"><span class="pages"><a  class="changepage" onclick="preblog('blogs')">上一篇</a>&nbsp&nbsp&nbsp&nbsp<a  class="changepage" onclick="nextblog('blogs')">下一篇</a><span></div></div></td></tr></table></div><div id="bottom"><p>Thanks to github</p></div></body></html>

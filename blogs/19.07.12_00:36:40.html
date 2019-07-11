@@ -1,0 +1,215 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>记菜鸟debian9升10血案[二]：systemd-network与network-manager的相互切换</title><link rel="stylesheet" href="../my.css"><script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><link><script src="../my.js"></script><script type="text/javascript"> window.onresize=clickheight;window.onload=clickheight;</script></head><body  ><div id="top" ><div class="logo" ><a ><img src="../img/1z.png"></a></div><div class="weather" ><iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&color=%23&icon=3&num=5"></iframe></div><ul class="menu" ><li class="item" ><a href="../index.html">首页</a></li><li class="item_current" ><a href="../blogs.html">日志</a></li><li class="item" ><a href="../works.html">作品</a></li><li class="item" ><a href="../helpme.html">求助</a></li><li class="item" ><a href="../about.html">关于</a></li></ul></div><div id="main"><table cellspacing=20px><tr ><td valign=top id="blog_show" class="blogshow"><div class = "showdiv"><div class = "blogtitle"><p class="title_text">记菜鸟debian9升10血案[二]：systemd-network与network-manager的相互切换</p><span class='writen_time'>19.07.12_00:47:39</span></div><div class = "blog_text"><p>
+	前文再续，书接上一回。上回说到我终于能够进桌面了。
+</p>
+<p>
+	既然桌面回来了，那当然是还原之前的样子，网络交回network-manager来管理。
+</p>
+<p>
+	先说一下之前network-manager改用systemd-network时的操作，来自百度：
+</p>
+<p>
+	https://www.linuxidc.com/Linux/2015-11/125430.htm
+</p>
+<p>
+	-----------------------------------------------
+</p>
+<p>
+	<br />
+</p>
+<p>
+	首先，按照下面这样先停用 NetworkManager 服务，然后启用 systemd-networkd。
+</p>
+<ol class="linenums">
+	<li class="L0">
+		<span class="pln"> </span><span class="kwd">sudo </span><span class="kwd">systemctl</span><span class="pln"> disable </span><span class="typ">NetworkManager</span> 
+	</li>
+	<li class="L1">
+		<span class="pln"> </span><span class="kwd">sudo </span><span class="kwd">systemctl</span><span class="pln"> enable </span><span class="kwd">systemd</span><span class="pun">-</span><span class="pln">networkd</span> 
+	</li>
+</ol>
+<p>
+	你还要启用 <strong>systemd-resolved</strong> 服务，systemd-networkd用它来进行域名解析。该服务还实现了一个缓存式 DNS 服务器。
+</p>
+<ol class="linenums">
+	<li class="L0">
+		<span class="pln"> </span><span class="kwd">sudo </span><span class="kwd">systemctl</span><span class="pln"> enable </span><span class="kwd">systemd</span><span class="pun">-</span><span class="pln">resolved</span> 
+	</li>
+	<li class="L1">
+		<span class="kwd">sudo </span><span class="kwd">systemctl</span><span class="pln"> start </span><span class="kwd">systemd</span><span class="pun">-</span><span class="pln">resolved</span> 
+	</li>
+</ol>
+<p>
+	当启动后，<strong>systemd-resolved</strong> 就会在 /run/systemd 目录下某个地方创建它自己的
+ resolv.conf。但是，把 DNS 解析信息存放在 /etc/resolv.conf 是更普遍的做法，很多应用程序也会依赖于 
+/etc/resolv.conf。因此为了兼容性，按照下面的方式创建一个到 /etc/resolv.conf 的符号链接。
+</p>
+<ol class="linenums">
+	<li class="L0">
+		<span class="kwd">sudo </span><span class="kwd">rm </span><span class="pun">/</span><span class="pln">etc</span><span class="pun">/</span><span class="pln">resolv</span><span class="pun">.</span><span class="pln">conf</span> 
+	</li>
+	<li class="L1">
+		<span class="kwd">sudo </span><span class="kwd">ln </span><span class="pun">-</span><span class="pln">s </span><span class="pun">/</span><span class="pln">run</span><span class="pun">/</span><span class="kwd">systemd</span><span class="pun">/</span><span class="pln">resolve</span><span class="pun">/</span><span class="pln">resolv</span><span class="pun">.</span><span class="pln">conf </span><span class="pun">/</span><span class="pln">etc</span><span class="pun">/</span><span class="pln">resolv</span><span class="pun">.</span><span class="pln">conf</span> 
+	</li>
+</ol>
+<p>
+	<br />
+</p>
+<h4 id="toc_3">
+	用 systemd-networkd 配置网络连接
+</h4>
+<p>
+	要用 systemd-networkd 配置网络服务，你必须指定带.network 扩展名的配置信息文本文件。这些网络配置文件保存到 
+/etc/systemd/network 并从这里加载。当有多个文件时，systemd-networkd 会按照字母顺序一个个加载并处理。
+</p>
+<p>
+	首先创建 /etc/systemd/network 目录。
+</p>
+<ol class="linenums">
+	<li class="L0">
+		<span class="pln"> </span><span class="kwd">sudo </span><span class="kwd">mkdir </span><span class="pun">/</span><span class="pln">etc</span><span class="pun">/</span><span class="kwd">systemd</span><span class="pun">/</span><span class="pln">network</span> 
+	</li>
+</ol>
+<p>
+	<br />
+</p>
+<h4 id="toc_4">
+	DHCP 网络
+</h4>
+<p>
+	首先来配置 DHCP 网络。对于此，先要创建下面的配置文件。文件名可以任意，但记住文件是按照字母顺序处理的。
+</p>
+<ol class="linenums">
+	<li class="L0">
+		<span class="pln"> </span><span class="kwd">sudo </span><span class="kwd">vi </span><span class="pun">/</span><span class="pln">etc</span><span class="pun">/</span><span class="kwd">systemd</span><span class="pun">/</span><span class="pln">network</span><span class="pun">/</span><span class="lit">20</span><span class="pun">-</span><span class="pln">dhcp</span><span class="pun">.</span><span class="pln">network</span> 
+	</li>
+</ol>
+<hr />
+<ol class="linenums">
+	<li class="L0">
+		<span class="pun">[</span><span class="typ">Match</span><span class="pun">]</span> 
+	</li>
+	<li class="L1">
+		<span class="typ">Name</span><span class="pun">=</span><span class="pln">enp0</span><span class="pun">*</span> 
+	</li>
+	<li class="L3">
+		<span class="pun">[</span><span class="typ">Network</span><span class="pun">]</span> 
+	</li>
+	<li class="L4">
+		<span class="pln">DHCP</span><span class="pun">=</span><span class="kwd">yes</span> 
+	</li>
+</ol>
+<p>
+	正如你上面看到的，每个网络配置文件包括了一个或多个 “sections”，每个 “section”都用 [XXX] 开头。每个 section 包括了一个或多个键值对。[Match]部分决定这个配置文件配置哪个（些）网络设备。例如，这个文件匹配所有名称以 ens3 开头的网络设备（例如 enp3s0、 enp3s1、 enp3s2 等等）对于匹配的接口，然后启用 [Network] 部分指定的 DHCP 网络配置。
+</p>
+-----------------
+<p>
+	<br />
+</p>
+<p>
+	<span style="color:#E53333;">注意：DHCP里面的Name，需要自行使用ip link命令查看自己的有限网卡是什么名字，我的是enp0开头的。</span> 
+</p>
+<p>
+	<span style="color:#E53333;"><br />
+</span> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	最后，重启 systemd-networkd。
+</p>
+<p>
+	<span class="pln"> </span><span class="kwd">sudo </span><span class="kwd">systemctl</span><span class="pln"> restart </span><span class="kwd">systemd</span><span class="pun">-</span><span class="pln">networkd</span> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	==================[ &nbsp;还原 ]=================
+</p>
+<p>
+	接着是我苦苦寻找多时的还原为network-manager的方法，其实方法很简单，只是我不知道要删除<span class="pun">/</span><span class="pln">etc</span><span class="pun">/</span><span class="pln">resolv</span><span class="pun">.</span><span class="pln">conf 这步。</span> 
+</p>
+<p>
+	步骤是：
+</p>
+<p>
+	先修改 /etc/NetworkManager/NetworkManager.conf 里面的
+</p>
+<p>
+	<br />
+</p>
+<p>
+	managed=false 改为 <span>managed=true</span> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	然后删除/etc/resolv.conf
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	接着将systemd-network停止，然后关闭。
+</p>
+<p>
+	<span class="kwd">sudo </span><span class="kwd">systemctl</span><span class="pln"> stop </span><span class="kwd">systemd</span><span class="pun">-</span><span class="pln">resolved</span> 
+</p>
+<p>
+	<span class="kwd">sudo </span><span class="kwd">systemctl</span><span class="pln"> stop </span><span class="kwd">systemd</span><span class="pun">-</span><span class="pln">networkd</span> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<span class="kwd">sudo </span><span class="kwd">systemctl</span><span class="pln"> disable </span><span class="kwd">systemd</span><span class="pun">-</span><span class="pln">resolved</span> 
+</p>
+<p>
+	<span class="pln"> </span><span class="kwd">sudo </span><span class="kwd">systemctl</span><span class="pln"> <span>disable</span> </span><span class="kwd">systemd</span><span class="pun">-</span><span class="pln">networkd</span> 
+</p>
+<p>
+	<span class="pln"><br />
+</span> 
+</p>
+<p>
+	<span class="pln">最后将network-manager开启，启动</span> 
+</p>
+<p>
+	<span class="pln"> </span><span class="kwd">sudo </span><span class="kwd">systemctl</span><span class="pln"> enable </span><span class="typ">NetworkManage</span> 
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<span class="pln"> </span><span class="kwd">sudo </span><span class="kwd">systemctl</span><span class="pln"> restart </span><span class="typ">NetworkManage</span> 
+</p>
+<p>
+	<span class="typ"><br />
+</span>
+</p>
+<p>
+	另外，想右下角有网络设置图标，安装network-manager-gnome就可以了。
+</p>
+<div>
+</div>
+<p>
+	<br />
+</p>
+<p>
+	<span class="pln"><br />
+</span> 
+</p>
+<p>
+	<br />
+</p></div><div class="prenextblog"><span class="pages"><a  class="changepage" onclick="preblog('blogs')">上一篇</a>&nbsp&nbsp&nbsp&nbsp<a  class="changepage" onclick="nextblog('blogs')">下一篇</a><span></div></div></td></tr></table></div><div id="bottom"><p>Thanks to github</p></div></body></html>
