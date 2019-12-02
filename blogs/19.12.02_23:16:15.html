@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>debian使用svp软件补帧流畅看视频，播放器使用VLC</title><link rel="stylesheet" href="../my.css"><script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><link><script src="../my.js"></script><script type="text/javascript"> window.onresize=clickheight;window.onload=clickheight;</script></head><body  ><div id="top" ><div class="logo" ><a ><img src="../img/1z.png"></a></div><div class="weather" ><iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&color=%23&icon=3&num=5"></iframe></div><ul class="menu" ><li class="item" ><a href="../index.html">首页</a></li><li class="item_current" ><a href="../blogs.html">日志</a></li><li class="item" ><a href="../works.html">作品</a></li><li class="item" ><a href="../helpme.html">求助</a></li><li class="item" ><a href="../about.html">关于</a></li></ul></div><div id="main"><table cellspacing=20px><tr ><td valign=top id="blog_show" class="blogshow"><div class = "showdiv"><div class = "blogtitle"><p class="title_text">debian使用svp软件补帧流畅看视频，播放器使用VLC</p><span class='writen_time'>19.12.02_23:30:09</span></div><div class = "blog_text"><p>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>debian使用svp软件补帧流畅看视频，播放器使用VLC</title><link rel="stylesheet" href="../my.css"><script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><link><script src="../my.js"></script><script type="text/javascript"> window.onresize=clickheight;window.onload=clickheight;</script></head><body  ><div id="top" ><div class="logo" ><a ><img src="../img/1z.png"></a></div><div class="weather" ><iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&color=%23&icon=3&num=5"></iframe></div><ul class="menu" ><li class="item" ><a href="../index.html">首页</a></li><li class="item_current" ><a href="../blogs.html">日志</a></li><li class="item" ><a href="../works.html">作品</a></li><li class="item" ><a href="../helpme.html">求助</a></li><li class="item" ><a href="../about.html">关于</a></li></ul></div><div id="main"><table cellspacing=20px><tr ><td valign=top id="blog_show" class="blogshow"><div class = "showdiv"><div class = "blogtitle"><p class="title_text">debian使用svp软件补帧流畅看视频，播放器使用VLC</p><span class='writen_time'>19.12.02_23:43:30</span></div><div class = "blog_text"><p>
 	人懒，而且写博客的软件不方便，不想插图片了，全靠意识流文字，自己领会。
 </p>
 <p>
@@ -11,7 +11,10 @@
 	svp是可以将普通视频播放时补帧到60帧或更高帧数的软件，使得画面更加流畅，动画效果明显
 </p>
 <p>
-	视频补帧有几个软件，其中amd的hd77xx系列显卡直接在win8以上的系统进行硬件补帧，软件补帧有svp和另外一个软件，可以使用gpu加速
+	视频补帧有几个软件，其中amd的hd77xx以后gnc架构的显卡可以配合软件直接在win8以上的系统进行硬件补帧，
+</p>
+<p>
+	软件补帧有svp和另外一个软件，可以使用gpu加速
 </p>
 <p>
 	补帧软件在windows下都是要钱，但linux下的svp是免费的，但是貌似没那么容易使用gpu加速，先不管，用上再说。
@@ -89,6 +92,7 @@ cd ..
 <pre><span style="font-family:'sans serif', tahoma, verdana, helvetica;">在应用程序设置，</span><span style="font-family:'sans serif', tahoma, verdana, helvetica;">附加设置，所有设置里，搜索“player”，将player的值改为vlc即可</span><span style="font-family:'sans serif', tahoma, verdana, helvetica;">，</span></pre>
 <pre><span style="font-family:'sans serif', tahoma, verdana, helvetica;">debian安装linux版svp后视频格式会变为svp打开，&nbsp;svp打开视频时，svp会自动调用vlc播放。</span></pre>
 <pre>
+
 
 
 
