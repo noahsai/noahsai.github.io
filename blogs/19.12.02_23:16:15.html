@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>debian使用svp软件补帧流畅看视频，播放器使用VLC</title><link rel="stylesheet" href="../my.css"><script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><link><script src="../my.js"></script><script type="text/javascript"> window.onresize=clickheight;window.onload=clickheight;</script></head><body  ><div id="top" ><div class="logo" ><a ><img src="../img/1z.png"></a></div><div class="weather" ><iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&color=%23&icon=3&num=5"></iframe></div><ul class="menu" ><li class="item" ><a href="../index.html">首页</a></li><li class="item_current" ><a href="../blogs.html">日志</a></li><li class="item" ><a href="../works.html">作品</a></li><li class="item" ><a href="../helpme.html">求助</a></li><li class="item" ><a href="../about.html">关于</a></li></ul></div><div id="main"><table cellspacing=20px><tr ><td valign=top id="blog_show" class="blogshow"><div class = "showdiv"><div class = "blogtitle"><p class="title_text">debian使用svp软件补帧流畅看视频，播放器使用VLC</p><span class='writen_time'>19.12.02_23:30:09</span></div><div class = "blog_text"><p>
+	人懒，而且写博客的软件不方便，不想插图片了，全靠意识流文字，自己领会。
+</p>
+<p>
+	教程源自svp官网wiki linux部分和vlc部分，最后设置是我自己发现。
+</p>
+<p>
+	=======================
+</p>
+<p>
+	svp是可以将普通视频播放时补帧到60帧或更高帧数的软件，使得画面更加流畅，动画效果明显
+</p>
+<p>
+	视频补帧有几个软件，其中amd的hd77xx系列显卡直接在win8以上的系统进行硬件补帧，软件补帧有svp和另外一个软件，可以使用gpu加速
+</p>
+<p>
+	补帧软件在windows下都是要钱，但linux下的svp是免费的，但是貌似没那么容易使用gpu加速，先不管，用上再说。
+</p>
+<p>
+	1.去svp官网下载linux版回来一键安装，
+</p>
+<p>
+	2. 然后根据svp官方wiki的linux部分进行安装，我用的是debian，播放器是VLC，所以这里只截取vlc的步骤
+</p>
+<p>
+	https://www.svp-team.com/wiki/SVP:Linux
+</p>
+<p>
+	<strong><span style="font-size:14px;">1）安装所需的库和vlc</span></strong> 
+</p>
+<pre>sudo apt-get install libqt5concurrent5 libqt5svg5 libqt5qml5</pre>
+<pre>sudo apt-get install mediainfo</pre>
+sudo apt-get install vlc<br />
+<p>
+	<br />
+</p>
+<p>
+	<strong><span style="font-size:14px;">2）编译svp需要的软件Vapoursynth</span></strong> 
+</p>
+<strong><span style="color:#666666;">先编译zimg </span></strong> 
+<p>
+	sudo apt-get install autoconf automake libtool pkg-config nasm git
+</p>
+<p>
+	<br />
+</p>
+<pre></pre>
+<pre>git clone <a class="external free" href="https://github.com/sekrit-twc/zimg.git">https://github.com/sekrit-twc/zimg.git</a> <span style="font-family:'sans serif', tahoma, verdana, helvetica;"></span></pre>
+<pre><span style="font-family:'sans serif', tahoma, verdana, helvetica;">cd zimg </span></pre>
+<pre>./autogen.sh
+./configure
+make -j4
+sudo make install
+cd ..
+</pre>
+<p>
+	<br />
+</p>
+<p>
+	<span style="font-size:12px;color:#666666;"><strong>再编译Vapoursynth</strong></span> 
+</p>
+<pre>git clone <a class="external free" href="https://github.com/vapoursynth/vapoursynth.git">https://github.com/vapoursynth/vapoursynth.git</a> </pre>
+<pre>&nbsp;cd vapoursynth
+./autogen.sh
+./configure
+make -j4
+sudo make install
+cd ..
+</pre>
+<pre>编译完成进行设置</pre>
+<pre>sudo ldconfig
+</pre>
+<pre>sudo ln -s /usr/local/lib/python3.7/site-packages/vapoursynth.so /usr/lib/python3.7/lib-dynload/vapoursynth.so</pre>
+<pre></pre>
+<pre><span style="font-family:'sans serif', tahoma, verdana, helvetica;"><strong><span style="font-size:14px;">3）设置vlc和svp</span></strong></span></pre>
+<pre>svp会让你选择vlc的路径的</pre>
+<pre><span style="font-family:'sans serif', tahoma, verdana, helvetica;">设置vlc插件目录权限</span></pre>
+<pre><span style="font-family:'sans serif', tahoma, verdana, helvetica;">sudo chmod 777 /usr/lib/x86_64-linux-gnu/vlc/plugins/video_filter </span></pre>
+<pre><span style="font-family:'sans serif', tahoma, verdana, helvetica;">然后打开svp，点击左上角图标，工具，点击“vlc的svp插件”</span></pre>
+<pre><span style="font-family:'sans serif', tahoma, verdana, helvetica;">如果提示你已启用即可～如果失败请确保vlc的目录权限已设置成功和vapoursynth编译成功</span></pre>
+<pre><span style="font-family:'sans serif', tahoma, verdana, helvetica;">接着，</span></pre>
+<pre><span style="font-family:'sans serif', tahoma, verdana, helvetica;">打开vlc，</span><span style="font-family:'sans serif', tahoma, verdana, helvetica;">在工具，偏好设置，输入/编解码器，将硬件加速禁用 </span></pre>
+<pre><span style="font-family:'sans serif', tahoma, verdana, helvetica;">再接着 </span></pre>
+<pre><span style="font-family:'sans serif', tahoma, verdana, helvetica;">点击左下角的全部，左边，界面，控制界面，将svp control interface打勾，</span></pre>
+<pre><span style="font-family:'sans serif', tahoma, verdana, helvetica;">然后查看视频-滤镜里是否有vapoursynth filter，有就行了，无需打勾 </span></pre>
+<pre><span style="font-family:'sans serif', tahoma, verdana, helvetica;">这时补帧已经可以使用了，先打开svp，再用vlc播放视频即可实现补帧播放。</span></pre>
+<pre><span style="font-family:'sans serif', tahoma, verdana, helvetica;"> </span><span style="font-family:'sans serif', tahoma, verdana, helvetica;font-size:14px;font-weight:bold;">4）设置svp默认调用vlc</span><span style="font-family:'sans serif', tahoma, verdana, helvetica;"><strong><span style="font-size:14px;"> </span></strong></span></pre>
+<pre><span style="font-family:'sans serif', tahoma, verdana, helvetica;">svp默认的是mpv，需要我们手动设置为vlc,</span></pre>
+<pre><span style="font-family:'sans serif', tahoma, verdana, helvetica;">在应用程序设置，</span><span style="font-family:'sans serif', tahoma, verdana, helvetica;">附加设置，所有设置里，搜索“player”，将player的值改为vlc即可</span><span style="font-family:'sans serif', tahoma, verdana, helvetica;">，</span></pre>
+<pre><span style="font-family:'sans serif', tahoma, verdana, helvetica;">debian安装linux版svp后视频格式会变为svp打开，&nbsp;svp打开视频时，svp会自动调用vlc播放。</span></pre>
+<pre>
+
+
+
+
+<pre></pre>
+</pre></div><div class="prenextblog"><span class="pages"><a  class="changepage" onclick="preblog('blogs')">上一篇</a>&nbsp&nbsp&nbsp&nbsp<a  class="changepage" onclick="nextblog('blogs')">下一篇</a><span></div></div></td></tr></table></div><div id="bottom"><p>Thanks to github</p></div></body></html>
