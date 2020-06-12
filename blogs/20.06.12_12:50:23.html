@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>QDataStream类保存文件会多出4个字节</title><link rel="stylesheet" href="../my.css"><script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script><link><script src="../my.js"></script><script type="text/javascript"> window.onresize=clickheight;window.onload=clickheight;</script></head><body  ><div id="top" ><div class="logo" ><a ><img src="../img/1z.png"></a></div><div class="weather" ><iframe width="420" scrolling="no" height="60" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&color=%23&icon=3&num=5"></iframe></div><ul class="menu" ><li class="item" ><a href="../index.html">首页</a></li><li class="item_current" ><a href="../blogs.html">日志</a></li><li class="item" ><a href="../works.html">作品</a></li><li class="item" ><a href="../helpme.html">求助</a></li><li class="item" ><a href="../about.html">关于</a></li></ul></div><div id="main"><table cellspacing=20px><tr ><td valign=top id="blog_show" class="blogshow"><div class = "showdiv"><div class = "blogtitle"><p class="title_text">QDataStream类保存文件会多出4个字节</p><span class='writen_time'>20.06.12_12:50:23</span></div><div class = "blog_text"><p>
+	在用我网页云音乐项目中，使用QDatastream保存m4a文件时发现m4a无法正常使用，
+</p>
+<p>
+	问题很早发现了，但懒得去找问题，之前直接改为用wget作为后台下载，
+</p>
+<p>
+	但是这两天想保存歌曲时发现电脑的软件版本不是修改wget的那个，而且代码是旧的，github上面也没有保存新的代码，
+</p>
+<p>
+	很显然是上次没有足够磁盘空间进行系统升级时升挂之后用了旧的系统备份还原导致的
+</p>
+<p>
+	那就没办法了，只能动手改就代码了，顺便找找根本问题，
+</p>
+<p>
+	对面过正常文件和软件保存的文件之后发现保存的会多出4个字节，很明显保存过程中出现问题了
+</p>
+<p>
+	但我用的都是qt自带的类，两三句代码进行保存的，而且通过输出看到，保存之前数据的大小还是正常的
+</p>
+<p>
+	通过qdatasteam写入文件后，文件大小就多了4个字节，所以，犯人找到了，QDataStream就是你！
+</p>
+<p>
+	百度一下QDataStream 多4字节，就出现相关的结果了，确实早已有人发现这个问题了，
+</p>
+<p>
+	网上提供的方法就是直接使用qfile的write方法进行保存就好了
+</p>
+<p>
+	然后，问题解决，可以愉快保存歌曲哦了，
+</p>
+<p>
+	最后，github，日志走一波
+</p></div><div class="prenextblog"><span class="pages"><a  class="changepage" onclick="preblog('blogs')">上一篇</a>&nbsp&nbsp&nbsp&nbsp<a  class="changepage" onclick="nextblog('blogs')">下一篇</a><span></div></div></td></tr></table></div><div id="bottom"><p>Thanks to github</p></div></body></html>
